@@ -5,7 +5,7 @@ Movie recommendation system written in Python with PyTorch.
 [IMDB Movies Dataset - kaggle](https://www.kaggle.com/datasets/harshitshankhdhar/imdb-dataset-of-top-1000-movies-and-tv-shows)
 
 ## Resource
-- [pytorch.org](https://pytorch.org)
+- [PyTorch Website](https://pytorch.org)
 - Introduction to PyTorch
   - [Learn the Basics](https://pytorch.org/tutorials/beginner/basics/intro.html)
   - [Quickstart](https://pytorch.org/tutorials/beginner/basics/quickstart_tutorial.html)
