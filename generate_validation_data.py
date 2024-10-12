@@ -1,4 +1,5 @@
 import pandas as pd
+import sys
 
 csv_dataset_file = 'data/imdb_top_1000.csv'
 
@@ -6,37 +7,44 @@ VALIDATION_DATA_DIR = 'validation_data/'
 
 csv_validation_dataset = VALIDATION_DATA_DIR + 'favorite_movies_imdb.csv'
 
-write_data = {
-}
+if __name__ == "__main__":
+    if len(sys.argv) < 2:
+        print("Missing the index of the row!")
+        exit()
+    args = sys.argv
+    row_index = int(args[1])
 
-df_data = pd.read_csv(csv_dataset_file)
+    write_data = {
+    }
 
-# Pick a movie
-row = df_data.iloc[10]
-genre = row[4]
-pick_genre_list = genre.split(",")
+    df_data = pd.read_csv(csv_dataset_file)
 
-file = open(VALIDATION_DATA_DIR + 'picked_genre_list.txt', 'w')
-file.write(str(pick_genre_list))
-
-print(pick_genre_list)
-print("")
-
-columns = df_data.columns
-
-for i in range(len(columns)):
-    column = columns[i]
-    write_data[column] = []
-
-for i, row in df_data.iterrows():
+    # Pick a movie
+    row = df_data.iloc[row_index]
     genre = row[4]
-    genre_list = genre.split(",")
+    pick_genre_list = genre.split(",")
 
-    for j in range(len(genre_list)):
-        if genre_list[j] in pick_genre_list:
-            for k in range(len(columns)):
-                column = columns[k]
-                write_data[column].append(row[column])
+    file = open(VALIDATION_DATA_DIR + 'picked_genre_list.txt', 'w')
+    file.write(str(pick_genre_list))
 
-df_write_data = pd.DataFrame(write_data)
-df_write_data.to_csv(csv_validation_dataset, index=False)
+    print(pick_genre_list)
+    print("")
+
+    columns = df_data.columns
+
+    for i in range(len(columns)):
+        column = columns[i]
+        write_data[column] = []
+
+    for i, row in df_data.iterrows():
+        genre = row[4]
+        genre_list = genre.split(",")
+
+        for j in range(len(genre_list)):
+            if genre_list[j] in pick_genre_list:
+                for k in range(len(columns)):
+                    column = columns[k]
+                    write_data[column].append(row[column])
+
+    df_write_data = pd.DataFrame(write_data)
+    df_write_data.to_csv(csv_validation_dataset, index=False)

@@ -5,28 +5,9 @@ Movie recommendation system written in Python with PyTorch.
 [IMDB Movies Dataset - kaggle](https://www.kaggle.com/datasets/harshitshankhdhar/imdb-dataset-of-top-1000-movies-and-tv-shows)
 
 ## 1. Create Validation Data
-
-1.1 Change the index of the row to any movie you want in the `generate_validation_data.py` script.
+1.1 Create validation data with the index of the row:
 ```
-...
-# Pick a movie
-row = df_data.iloc[10]
-genre = row[4]
-pick_genre_list = genre.split(",")
-...
-```
-
-1.1.1 For example, change the index of the row to 5:
-```
-...
-# Pick a movie
-row = df_data.iloc[5]
-...
-```
-
-1.2 Create validation data
-```
-python3 generate_validation_data.py
+python3 generate_validation_data.py 21
 ```
 
 ## 2. Train a Model
