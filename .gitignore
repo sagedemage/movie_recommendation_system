@@ -6,6 +6,8 @@ venv/
 runs/
 trained_models/
 
+validation_data/
+
 # PyCharm Python IDE
 .idea/
 
