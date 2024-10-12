@@ -96,7 +96,6 @@ timestamp = datetime.now().strftime('%Y%m%d_%H%M%S')
 writer = SummaryWriter('runs/movie_trainer_{}'.format(timestamp))
 epoch_number = 0
 EPOCHS = 5
-#best_vloss = 1_000_000.
 best_vloss =1.414661889*math.pow(10, 35)
 
 for epoch in range(EPOCHS):
