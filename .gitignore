@@ -2,6 +2,10 @@
 __pycache__/
 venv/
 
+# PyTorch
+runs/
+trained_models/
+
 # PyCharm Python IDE
 .idea/
 
