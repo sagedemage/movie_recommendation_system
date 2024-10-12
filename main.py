@@ -18,7 +18,7 @@ TRAINED_MODEL_DIR = "trained_models/"
 csv_dataset = 'data/imdb_top_1000.csv'
 
 # Use trained model
-MODEL_PATH = TRAINED_MODEL_DIR + "model_20241012_190445_0"
+MODEL_PATH = TRAINED_MODEL_DIR + "model_20241012_191803_0"
 
 training_set = CustomDataset(csv_dataset)
 training_loader = DataLoader(training_set, batch_size=BATCH_SIZE, shuffle=True)
