@@ -24,7 +24,7 @@ python3 train_model.py
 ## 3. Run Program
 3.1 Run the program with the file path of the model
 ```
-python3 main.py trained_models/model_20241012_191803_0
+python3 main.py trained_models/model_20241012_195623_0.pt
 ```
 
 ## Resource
