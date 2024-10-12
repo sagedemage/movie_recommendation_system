@@ -11,23 +11,25 @@ class CustomDataset(Dataset):
         return len(self.df_data)
 
     def __getitem__(self, idx: int):
+        row = self.df_data.iloc[idx]
+
         column = 0
-        title = self.df_data.iloc[idx, column]
+        title = row[column]
 
         column = 1
-        released_year = self.df_data.iloc[idx, column]
+        released_year = row[column]
 
         column = 3
-        runtime = self.df_data.iloc[idx, column]
+        runtime = row[column]
 
         column = 4
-        genre = self.df_data.iloc[idx, column]
+        genre = row[column]
 
         column = 5
-        imdb_rating = self.df_data.iloc[idx, column]
+        imdb_rating = row[column]
 
         column = 8
-        director = self.df_data.iloc[idx, column]
+        director = row[column]
 
         if self.target_transform:
             title = self.target_transform(title)
