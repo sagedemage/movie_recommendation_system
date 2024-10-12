@@ -13,6 +13,7 @@ if __name__ == "__main__":
         exit()
     args = sys.argv
     model_path = args[1]
+
     device = (
         "cuda"
         if torch.cuda.is_available()
