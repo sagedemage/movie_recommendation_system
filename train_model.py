@@ -12,8 +12,8 @@ from ml.model import NeuralNetwork
 
 TRAINED_MODEL_DIR = "trained_models/"
 
-csv_dataset = 'data/imdb_top_1000.csv'
-csv_validation_dataset = 'validation_data/favorite_movies_imdb.csv'
+CSV_DATASET = 'data/imdb_top_1000.csv'
+CSV_VALIDATION_DATASET = 'validation_data/favorite_movies_imdb.csv'
 BATCH_SIZE = 4
 EPOCHS = 75
 LEARNING_RATE = 0.0005
@@ -56,8 +56,8 @@ def train_one_epoch(epoch_index, tb_writer: SummaryWriter, training_loader: Data
         return last_loss
 
 def main():
-    training_set = CustomDataset(csv_dataset)
-    validation_set = CustomDataset(csv_validation_dataset)
+    training_set = CustomDataset(CSV_DATASET)
+    validation_set = CustomDataset(CSV_VALIDATION_DATASET)
 
     print("Length of training set: " + str(training_set.__len__()))
     print("Length of validation set: " + str(validation_set.__len__()))

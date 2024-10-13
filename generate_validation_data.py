@@ -1,13 +1,11 @@
 import pandas as pd
 import sys
 
-csv_dataset_file = 'data/imdb_top_1000.csv'
-
+CSV_DATASET = 'data/imdb_top_1000.csv'
 VALIDATION_DATA_DIR = 'validation_data/'
+CSV_VALIDATION_DATASET = VALIDATION_DATA_DIR + 'favorite_movies_imdb.csv'
 
-csv_validation_dataset = VALIDATION_DATA_DIR + 'favorite_movies_imdb.csv'
-
-if __name__ == "__main__":
+def main():
     if len(sys.argv) < 2:
         print("Missing the index of the row!")
         exit()
@@ -18,7 +16,7 @@ if __name__ == "__main__":
     write_data = {
     }
 
-    df_data = pd.read_csv(csv_dataset_file)
+    df_data = pd.read_csv(CSV_DATASET)
 
     # Pick a movie
     row = df_data.iloc[row_index]
@@ -60,4 +58,7 @@ if __name__ == "__main__":
 
     # Remove duplicate data
     df_write_data = df_write_data.drop_duplicates()
-    df_write_data.to_csv(csv_validation_dataset, index=False)
+    df_write_data.to_csv(CSV_VALIDATION_DATASET, index=False)
+
+if __name__ == "__main__":
+    main()

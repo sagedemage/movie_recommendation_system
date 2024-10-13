@@ -6,8 +6,9 @@ from ml.dataset import CustomDataset
 from ml.model import NeuralNetwork
 
 BATCH_SIZE = 4
+CSV_DATASET = 'data/imdb_top_1000.csv'
 
-if __name__ == "__main__":
+def main():
     if len(sys.argv) < 2:
         print("Missing the model file path!")
         exit()
@@ -23,9 +24,7 @@ if __name__ == "__main__":
         else "cpu"
     )
 
-    csv_dataset = 'data/imdb_top_1000.csv'
-
-    training_set = CustomDataset(csv_dataset)
+    training_set = CustomDataset(CSV_DATASET)
     training_loader = DataLoader(training_set, batch_size=BATCH_SIZE, shuffle=True)
 
     train_movie_id, train_title, train_released_year, train_runtime, train_genre, train_imdb_rating, train_director = next(
@@ -61,3 +60,6 @@ if __name__ == "__main__":
     print(f"IMDB Rating: {imdb_rating}")
     print(f"Director: {director}")
     print("")
+
+if __name__ == "__main__":
+    main()
