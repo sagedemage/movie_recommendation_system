@@ -3,7 +3,7 @@ import torch
 from torch.utils.data import DataLoader
 from torch import nn
 from ml_model.dataset import CustomDataset
-from ml_model.neural_network import NeuralNetwork
+from ml_model.model import NeuralNetwork
 
 BATCH_SIZE = 64
 
