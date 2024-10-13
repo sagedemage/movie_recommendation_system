@@ -33,6 +33,7 @@ def train_one_epoch(epoch_index, tb_writer: torch.utils.tensorboard.writer.Summa
 
         # Compute the loss and its gradients
         # outputs with a class dimension as [batch_size, nb_classes, *additional_dims]
+        # weight, size_average
         loss = loss_fn(outputs, movie_id)
         loss.backward()
 
@@ -43,9 +44,10 @@ def train_one_epoch(epoch_index, tb_writer: torch.utils.tensorboard.writer.Summa
         running_loss += loss.item()
         if i % 1000 == 999:
             last_loss = running_loss / 1000 # loss per batch
+            print('batch {} loss: {}'.format(i + 1, last_loss))
             tb_x = epoch_index * len(training_loader) + i + 1
             tb_writer.add_scalar('Loss/train', last_loss, tb_x)
-            running_loss = 0
+            running_loss = 0.
 
         return last_loss
 
