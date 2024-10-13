@@ -25,9 +25,12 @@ if __name__ == "__main__":
     genre = row[4]
     pick_genre_list = genre.split(",")
 
-    file = open(VALIDATION_DATA_DIR + 'picked_genre_list.txt', 'w')
+    file = open(VALIDATION_DATA_DIR + 'picked_movie.txt', 'w')
+    file.write(str(row))
+    file.write("\n\n")
     file.write(str(pick_genre_list))
 
+    print(row)
     print(pick_genre_list)
     print("")
 
