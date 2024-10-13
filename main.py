@@ -12,6 +12,7 @@ if __name__ == "__main__":
         print("Missing the model file path!")
         exit()
     args = sys.argv
+    # Use trained model
     model_path = args[1]
 
     device = (
@@ -23,10 +24,6 @@ if __name__ == "__main__":
     )
 
     csv_dataset = 'data/imdb_top_1000.csv'
-
-    # Use trained model
-    # MODEL_PATH = model_path
-    # "trained_models/model_20241012_191803_0"
 
     training_set = CustomDataset(csv_dataset)
     training_loader = DataLoader(training_set, batch_size=BATCH_SIZE, shuffle=True)

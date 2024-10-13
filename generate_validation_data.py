@@ -12,6 +12,7 @@ if __name__ == "__main__":
         print("Missing the index of the row!")
         exit()
     args = sys.argv
+    # Index of the row
     row_index = int(args[1])
 
     write_data = {
