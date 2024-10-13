@@ -15,8 +15,8 @@ TRAINED_MODEL_DIR = "trained_models/"
 CSV_DATASET = 'data/imdb_top_1000.csv'
 CSV_VALIDATION_DATASET = 'validation_data/favorite_movies_imdb.csv'
 BATCH_SIZE = 4
-EPOCHS = 75
-LEARNING_RATE = 0.0005
+EPOCHS = 100
+LEARNING_RATE = 0.00005
 
 def train_one_epoch(epoch_index, tb_writer: SummaryWriter, training_loader: DataLoader, optimizer: SGD, device: str, model: NeuralNetwork, loss_fn: L1Loss):
     running_loss = 0.
@@ -105,7 +105,7 @@ def main():
     timestamp = datetime.now().strftime('%Y%m%d_%H%M%S')
     writer = SummaryWriter('runs/movie_trainer_{}'.format(timestamp))
     epoch_number = 0
-    best_vloss = 72.19
+    best_vloss = 14.99
 
     for epoch in range(EPOCHS):
         print('EPOCH {}:'.format(epoch_number + 1))
