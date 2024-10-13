@@ -1,10 +1,9 @@
 import torch
 from torch.utils.data import DataLoader
 from torch.optim import SGD
-from torch.nn import CrossEntropyLoss
+from torch.nn import L1Loss
 
 from datetime import datetime
-import math
 
 from torch.utils.tensorboard import SummaryWriter
 
@@ -17,7 +16,7 @@ csv_dataset = 'data/imdb_top_1000.csv'
 csv_validation_dataset = 'validation_data/favorite_movies_imdb.csv'
 BATCH_SIZE = 4
 
-def train_one_epoch(epoch_index, tb_writer: SummaryWriter, training_loader: DataLoader, optimizer: SGD, device: str, model: NeuralNetwork, loss_fn: CrossEntropyLoss):
+def train_one_epoch(epoch_index, tb_writer: SummaryWriter, training_loader: DataLoader, optimizer: SGD, device: str, model: NeuralNetwork, loss_fn: L1Loss):
     running_loss = 0.
     last_loss = 0.
 
@@ -95,7 +94,7 @@ def main():
     model = NeuralNetwork().to(device)
 
     # Loss Function
-    loss_fn = torch.nn.CrossEntropyLoss()
+    loss_fn = torch.nn.L1Loss()
 
     # Optimizer
     optimizer = torch.optim.SGD(model.parameters(), lr=0.0005)
@@ -105,9 +104,7 @@ def main():
     writer = SummaryWriter('runs/movie_trainer_{}'.format(timestamp))
     epoch_number = 0
     EPOCHS = 75
-    best_vloss =1.4948114841678643*math.pow(10, 18)
-
-    # 1.4948114841678643e+18
+    best_vloss = 72.19
 
     for epoch in range(EPOCHS):
         print('EPOCH {}:'.format(epoch_number + 1))
@@ -132,8 +129,6 @@ def main():
                 voutputs = model(vmovie_id)
                 vloss = loss_fn(voutputs, vmovie_id)
                 running_vloss += vloss
-
-        print(f"running_vloss: {running_vloss}")
 
         avg_vloss = running_vloss / (i + 1)
         print('LOSS train {} valid {}'.format(avg_loss, avg_vloss))
