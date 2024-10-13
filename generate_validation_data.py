@@ -53,6 +53,11 @@ if __name__ == "__main__":
     length = len(write_data["Series_Title"])
 
     df_write_data = pd.DataFrame(write_data)
+
+    if length % 4 != 0:
+        remainder = length % 4
+        df_write_data.drop(df_write_data.tail(remainder).index, inplace=True)
+
     # Remove duplicate data
     df_write_data = df_write_data.drop_duplicates()
     df_write_data.to_csv(csv_validation_dataset, index=False)
