@@ -16,7 +16,12 @@ python3 generate_validation_data.py 21
 mkdir trained_models
 ```
 
-2.2 Train a model
+2.2 Start TensorBoard
+```
+tensorboard --logdir=runs
+```
+
+2.3 Train a model
 ```
 python3 train_model.py
 ```
