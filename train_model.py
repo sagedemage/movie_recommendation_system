@@ -15,7 +15,7 @@ TRAINED_MODEL_DIR = "trained_models/"
 
 csv_dataset = 'data/imdb_top_1000.csv'
 csv_validation_dataset = 'validation_data/favorite_movies_imdb.csv'
-BATCH_SIZE = 64
+BATCH_SIZE = 4
 
 def train_one_epoch(epoch_index, tb_writer: SummaryWriter, training_loader: DataLoader, optimizer: SGD, device: str, model: NeuralNetwork, loss_fn: CrossEntropyLoss):
     running_loss = 0.
@@ -58,7 +58,8 @@ def main():
     training_set = CustomDataset(csv_dataset)
     validation_set = CustomDataset(csv_validation_dataset)
 
-    print("Length: " + str(training_set.__len__()))
+    print("Length of training set: " + str(training_set.__len__()))
+    print("Length of validation set: " + str(validation_set.__len__()))
     print("")
 
     movie_id, title, released_year, runtime, genre, imdb_rating, director = training_set.__getitem__(0)
@@ -127,9 +128,6 @@ def main():
 
                 vmovie_id = vmovie_id.to(device)
                 vmovie_id = vmovie_id.type(torch.float32)
-
-                if vmovie_id.shape[0] != BATCH_SIZE:
-                    continue
 
                 voutputs = model(vmovie_id)
                 vloss = loss_fn(voutputs, vmovie_id)

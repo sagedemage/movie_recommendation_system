@@ -5,7 +5,7 @@ from torch import nn
 from ml.dataset import CustomDataset
 from ml.model import NeuralNetwork
 
-BATCH_SIZE = 64
+BATCH_SIZE = 4
 
 if __name__ == "__main__":
     if len(sys.argv) < 2:
