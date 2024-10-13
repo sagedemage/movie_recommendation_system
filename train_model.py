@@ -5,8 +5,8 @@ import math
 
 from torch.utils.tensorboard import SummaryWriter
 
-from ml_model.dataset import CustomDataset
-from ml_model.model import NeuralNetwork
+from ml.dataset import CustomDataset
+from ml.model import NeuralNetwork
 
 TRAINED_MODEL_DIR = "trained_models/"
 
