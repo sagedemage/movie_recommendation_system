@@ -50,5 +50,9 @@ if __name__ == "__main__":
                     column = columns[k]
                     write_data[column].append(row[column])
 
+    length = len(write_data["Series_Title"])
+
     df_write_data = pd.DataFrame(write_data)
+    # Remove duplicate data
+    df_write_data = df_write_data.drop_duplicates()
     df_write_data.to_csv(csv_validation_dataset, index=False)
