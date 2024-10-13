@@ -67,9 +67,11 @@ print("")
 
 # batch_size (int, optional) – how many samples per batch to load (default: 1).
 training_loader = DataLoader(training_set, batch_size=BATCH_SIZE, shuffle=True)
-validation_loader = DataLoader(validation_set, batch_size=BATCH_SIZE, shuffle=True)
+validation_loader = DataLoader(validation_set, batch_size=BATCH_SIZE, shuffle=False)
 
-train_movie_id, train_title, train_released_year, train_runtime, train_genre, train_imdb_rating, train_director = next(iter(training_loader))
+# Report split sizes
+print('Training set has {} instances'.format(len(training_set)))
+print('Validation set has {} instances'.format(len(validation_set)))
 
 device = (
     "cuda"
@@ -89,16 +91,20 @@ model = NeuralNetwork().to(device)
 loss_fn = torch.nn.CrossEntropyLoss()
 
 # Optimizer
-optimizer = torch.optim.SGD(model.parameters(), lr=0.001, momentum=0.9)
+optimizer = torch.optim.SGD(model.parameters(), lr=0.0005)
 
 # Training Loop
 timestamp = datetime.now().strftime('%Y%m%d_%H%M%S')
 writer = SummaryWriter('runs/movie_trainer_{}'.format(timestamp))
 epoch_number = 0
-EPOCHS = 5
-best_vloss =1.414661889*math.pow(10, 35)
+EPOCHS = 75
+best_vloss =1.4948114841678643*math.pow(10, 18)
+
+# 1.4948114841678643e+18
 
 for epoch in range(EPOCHS):
+    print('EPOCH {}:'.format(epoch_number + 1))
+
     # Make sure gradient tracking is on, and do a pass over the data
     model.train(True)
     avg_loss = train_one_epoch(epoch_number, writer)
@@ -122,6 +128,8 @@ for epoch in range(EPOCHS):
             voutputs = model(vmovie_id)
             vloss = loss_fn(voutputs, vmovie_id)
             running_vloss += vloss
+
+    print(f"running_vloss: {running_vloss}")
 
     avg_vloss = running_vloss / (i + 1)
     print('LOSS train {} valid {}'.format(avg_loss, avg_vloss))
