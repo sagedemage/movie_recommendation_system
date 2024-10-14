@@ -1,5 +1,6 @@
 import pandas as pd
 import sys
+
 from config import CSV_DATASET, CSV_VALIDATION_DATASET
 
 def main():
@@ -45,16 +46,23 @@ def main():
                     column = columns[k]
                     write_data[column].append(row[column])
 
-    length = len(write_data["Series_Title"])
-
     df_write_data = pd.DataFrame(write_data)
 
-    if length % 4 != 0:
-        remainder = length % 4
-        df_write_data = df_write_data.drop(df_write_data.tail(remainder).index)
+    num_rows = df_write_data.shape[0]
 
     # Remove duplicate data
     df_write_data = df_write_data.drop_duplicates()
+
+    # Make sure the length of the dataset is divisible by 4
+    # This is required for it to work with a batch size of 4
+    # for training
+    if num_rows % 4 != 0:
+        rem = num_rows % 4
+        df_write_data = df_write_data.drop(df_write_data.tail(rem).index)
+        print(f"Number of rows: {num_rows}")
+        print(f"Remainder: {rem}")
+
+    # Write the data to a CSV file
     df_write_data.to_csv(CSV_VALIDATION_DATASET, index=False)
 
 if __name__ == "__main__":
