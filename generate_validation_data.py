@@ -1,9 +1,6 @@
 import pandas as pd
 import sys
-
-CSV_DATASET = 'data/imdb_top_1000.csv'
-VALIDATION_DATA_DIR = 'validation_data/'
-CSV_VALIDATION_DATASET = VALIDATION_DATA_DIR + 'favorite_movies_imdb.csv'
+from config import CSV_DATASET, CSV_VALIDATION_DATASET
 
 def main():
     if len(sys.argv) < 2:
@@ -23,7 +20,7 @@ def main():
     genre = row[4]
     pick_genre_list = genre.split(",")
 
-    file = open(VALIDATION_DATA_DIR + 'picked_movie.txt', 'w')
+    file = open('validation_data/picked_movie.txt', 'w')
     file.write(str(row))
     file.write("\n\n")
     file.write(str(pick_genre_list))

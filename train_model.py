@@ -10,10 +10,11 @@ from torch.utils.tensorboard import SummaryWriter
 from ml.dataset import CustomDataset
 from ml.model import NeuralNetwork
 
-TRAINED_MODEL_DIR = "trained_models/"
+from config import CSV_DATASET, CSV_VALIDATION_DATASET
 
-CSV_DATASET = 'data/imdb_top_1000.csv'
-CSV_VALIDATION_DATASET = 'validation_data/favorite_movies_imdb.csv'
+TRAINED_MODEL_DIR = "trained_models/"
+LOG_DATA_DIR = "runs/"
+
 BATCH_SIZE = 4
 EPOCHS = 100
 LEARNING_RATE = 0.00005
@@ -103,7 +104,7 @@ def main():
 
     # Training Loop
     timestamp = datetime.now().strftime('%Y%m%d_%H%M%S')
-    writer = SummaryWriter('runs/movie_trainer_{}'.format(timestamp))
+    writer = SummaryWriter(LOG_DATA_DIR + 'movie_trainer_{}'.format(timestamp))
     epoch_number = 0
     best_vloss = 14.99
 

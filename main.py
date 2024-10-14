@@ -5,8 +5,9 @@ from torch import nn
 from ml.dataset import CustomDataset
 from ml.model import NeuralNetwork
 
+from config import CSV_DATASET
+
 BATCH_SIZE = 4
-CSV_DATASET = 'data/imdb_top_1000.csv'
 
 def main():
     if len(sys.argv) < 2:
