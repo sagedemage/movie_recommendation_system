@@ -48,10 +48,10 @@ def main():
 
     df_write_data = pd.DataFrame(write_data)
 
-    num_rows = df_write_data.shape[0]
-
     # Remove duplicate data
     df_write_data = df_write_data.drop_duplicates()
+
+    num_rows = df_write_data.shape[0]
 
     # Make sure the length of the dataset is divisible by 4
     # This is required for it to work with a batch size of 4
