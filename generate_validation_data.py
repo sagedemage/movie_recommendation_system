@@ -51,7 +51,7 @@ def main():
 
     if length % 4 != 0:
         remainder = length % 4
-        df_write_data.drop(df_write_data.tail(remainder).index, inplace=True)
+        df_write_data = df_write_data.drop(df_write_data.tail(remainder).index)
 
     # Remove duplicate data
     df_write_data = df_write_data.drop_duplicates()
