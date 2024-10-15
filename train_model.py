@@ -141,7 +141,7 @@ def main():
         writer.flush()
 
         # Track the best performance, and save the model's state
-        if avg_vloss <= best_vloss:
+        if avg_vloss < best_vloss:
             best_vloss = avg_vloss
             # Save the model's state
             model_path = TRAINED_MODEL_DIR + 'model_{}_{}.pt'.format(timestamp, epoch_number)
