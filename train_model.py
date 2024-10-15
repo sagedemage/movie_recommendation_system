@@ -107,6 +107,7 @@ def main():
     writer = SummaryWriter(LOG_DATA_DIR + 'movie_trainer_{}'.format(timestamp))
     epoch_number = 0
     best_vloss = 1_000_000.
+    best_epoch_number = 0
 
     for epoch in range(EPOCHS):
         print('EPOCH {}:'.format(epoch_number + 1))
@@ -143,10 +144,13 @@ def main():
         # Track the best performance, and save the model's state
         if avg_vloss <= best_vloss:
             best_vloss = avg_vloss
-            model_path = TRAINED_MODEL_DIR + 'model_{}_{}.pt'.format(timestamp, epoch_number)
-            torch.save(model.state_dict(), model_path)
+            best_epoch_number = epoch_number
 
         epoch_number += 1
+
+    # Save the model's state with the best performance
+    model_path = TRAINED_MODEL_DIR + 'model_{}_{}.pt'.format(timestamp, best_epoch_number)
+    torch.save(model.state_dict(), model_path)
 
 if __name__ == "__main__":
     main()
