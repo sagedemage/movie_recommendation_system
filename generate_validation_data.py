@@ -17,16 +17,17 @@ def main():
     df_data = pd.read_csv(CSV_DATASET)
 
     # Pick a movie
-    row = df_data.iloc[row_index]
-    genre = row["Genre"]
-    pick_genre_list = genre.split(",")
+    pick_row = df_data.iloc[row_index]
+    pick_genre = pick_row["Genre"]
+    pick_genre = pick_genre.replace(" ", "")
+    pick_genre_list = pick_genre.split(",")
 
     file = open('validation_data/picked_movie.txt', 'w')
-    file.write(str(row))
+    file.write(str(pick_row))
     file.write("\n\n")
     file.write(str(pick_genre_list))
 
-    print(row)
+    print(pick_row)
     print(pick_genre_list)
     print("")
 
@@ -37,11 +38,12 @@ def main():
         write_data[column] = []
 
     for i, row in df_data.iterrows():
-        genre = row["Genre"]
-        genre_list = genre.split(",")
+        r_genre = row["Genre"]
+        r_genre = r_genre.replace(" ", "")
+        r_genre_list = r_genre.split(",")
 
-        for j in range(len(genre_list)):
-            if genre_list[j] in pick_genre_list:
+        for j in range(len(r_genre_list)):
+            if r_genre_list[j] in pick_genre_list:
                 for k in range(len(columns)):
                     column = columns[k]
                     write_data[column].append(row[column])
