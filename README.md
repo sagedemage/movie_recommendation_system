@@ -51,13 +51,14 @@ A user chooses this as their favorite movie:
 - No_of_Votes: 699256
 - Gross: 7563397.0
 
+### 1. Results
 Here are the results after running the movie recommendation program 100 times:
-- Number of correct recommendations: 73
-- Number of incorrect recommendations: 27
+- Number of correct recommendations: 72
+- Number of incorrect recommendations: 28
 - Total number of recommendations: 100
-- Accuracy of the recommendations: 73%
+- Accuracy of the recommendations: 72%
 
-The accuracy of the model is 73%. There is certainly more work that has to be
+The accuracy of the model is 72%. There is certainly more work that has to be
 done to get it to a 90% accuracy. An accuracy close to 75% is not too bad for
 a demo project.
 
