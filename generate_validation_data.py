@@ -18,7 +18,7 @@ def main():
 
     # Pick a movie
     row = df_data.iloc[row_index]
-    genre = row[4]
+    genre = row["Genre"]
     pick_genre_list = genre.split(",")
 
     file = open('validation_data/picked_movie.txt', 'w')
@@ -37,7 +37,7 @@ def main():
         write_data[column] = []
 
     for i, row in df_data.iterrows():
-        genre = row[4]
+        genre = row["Genre"]
         genre_list = genre.split(",")
 
         for j in range(len(genre_list)):
