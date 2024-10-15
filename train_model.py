@@ -106,7 +106,7 @@ def main():
     timestamp = datetime.now().strftime('%Y%m%d_%H%M%S')
     writer = SummaryWriter(LOG_DATA_DIR + 'movie_trainer_{}'.format(timestamp))
     epoch_number = 0
-    best_vloss = 12.07
+    best_vloss = 1_000_000.
 
     for epoch in range(EPOCHS):
         print('EPOCH {}:'.format(epoch_number + 1))
