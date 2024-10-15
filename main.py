@@ -39,14 +39,16 @@ def main():
     data_movie_id = data_movie_id.to(device)
     data_movie_id = data_movie_id.type(torch.float32)
 
-    print(f"Shape: {data_movie_id.shape}")
-    print(f"Datatype: {data_movie_id.dtype}")
-    print(f"Device: {data_movie_id.device}")
-    print("")
-
     logits = saved_model(data_movie_id)
-    pred_probab = nn.Softmax(dim=0)(logits)
-    pred_tensor = data_movie_id[0].item()
+    pred_probab = nn.Softplus()(logits)
+    y_pred = pred_probab.argmax(0)
+    pred_tensor = pred_probab[y_pred]
+
+    print(f"logits: {logits}")
+    print(f"y pred: {y_pred}")
+    print(f"Pred probab: {pred_probab}")
+    print(f"Pred tensor: {pred_tensor}")
+    print("")
 
     movie_id = int(pred_tensor)
     _, title, released_year, runtime, genre, imdb_rating, director = data_set.__getitem__(movie_id)
