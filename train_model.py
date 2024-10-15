@@ -16,8 +16,8 @@ TRAINED_MODEL_DIR = "trained_models/"
 LOG_DATA_DIR = "runs/"
 
 BATCH_SIZE = 4
-EPOCHS = 100
-LEARNING_RATE = 0.00005
+EPOCHS = 130
+LEARNING_RATE = 0.000005
 
 def train_one_epoch(epoch_index, tb_writer: SummaryWriter, training_loader: DataLoader, optimizer: SGD, device: str, model: NeuralNetwork, loss_fn: L1Loss):
     running_loss = 0.
@@ -106,7 +106,7 @@ def main():
     timestamp = datetime.now().strftime('%Y%m%d_%H%M%S')
     writer = SummaryWriter(LOG_DATA_DIR + 'movie_trainer_{}'.format(timestamp))
     epoch_number = 0
-    best_vloss = 14.99
+    best_vloss = 12.31
 
     for epoch in range(EPOCHS):
         print('EPOCH {}:'.format(epoch_number + 1))
