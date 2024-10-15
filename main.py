@@ -44,12 +44,6 @@ def main():
     y_pred = pred_probab.argmax(0)
     pred_tensor = pred_probab[y_pred]
 
-    print(f"logits: {logits}")
-    print(f"y pred: {y_pred}")
-    print(f"Pred probab: {pred_probab}")
-    print(f"Pred tensor: {pred_tensor}")
-    print("")
-
     movie_id = int(pred_tensor)
     _, title, released_year, runtime, genre, imdb_rating, director = data_set.__getitem__(movie_id)
 
