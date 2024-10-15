@@ -13,6 +13,7 @@ class CustomDataset(Dataset):
     def __getitem__(self, idx: int):
         row = self.df_data.iloc[idx]
 
+        movie_id = row["Movie_ID"]
         title = row["Series_Title"]
         released_year = row["Released_Year"]
         runtime = row["Runtime"]
@@ -21,10 +22,12 @@ class CustomDataset(Dataset):
         director = row["Director"]
 
         if self.target_transform:
+            movie_id = self.target_transform(movie_id)
             title = self.target_transform(title)
             released_year = self.target_transform(released_year)
+            runtime = self.target_transform(runtime)
             genre = self.target_transform(genre)
             imdb_rating = self.target_transform(imdb_rating)
             director = self.target_transform(director)
 
-        return idx, title, released_year, runtime, genre, imdb_rating, director
+        return movie_id, title, released_year, runtime, genre, imdb_rating, director
