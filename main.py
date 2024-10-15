@@ -25,31 +25,31 @@ def main():
         else "cpu"
     )
 
-    training_set = CustomDataset(CSV_DATASET)
-    training_loader = DataLoader(training_set, batch_size=BATCH_SIZE, shuffle=True)
+    data_set = CustomDataset(CSV_DATASET)
+    data_loader = DataLoader(data_set, batch_size=BATCH_SIZE, shuffle=True)
 
-    train_movie_id, train_title, train_released_year, train_runtime, train_genre, train_imdb_rating, train_director = next(
-        iter(training_loader))
+    data_movie_id, data_title, data_released_year, data_runtime, data_genre, data_imdb_rating, data_director = next(
+        iter(data_loader))
 
     # Load a saved version of the model
     saved_model = NeuralNetwork().to(device)
     saved_model.load_state_dict(torch.load(model_path, weights_only=True))
 
     # Perform a transform on the data for it to be usable for the model
-    train_movie_id = train_movie_id.to(device)
-    train_movie_id = train_movie_id.type(torch.float32)
+    data_movie_id = data_movie_id.to(device)
+    data_movie_id = data_movie_id.type(torch.float32)
 
-    print(f"Shape: {train_movie_id.shape}")
-    print(f"Datatype: {train_movie_id.dtype}")
-    print(f"Device: {train_movie_id.device}")
+    print(f"Shape: {data_movie_id.shape}")
+    print(f"Datatype: {data_movie_id.dtype}")
+    print(f"Device: {data_movie_id.device}")
     print("")
 
-    logits = saved_model(train_movie_id)
+    logits = saved_model(data_movie_id)
     pred_probab = nn.Softmax(dim=0)(logits)
-    pred_tensor = train_movie_id[0].item()
+    pred_tensor = data_movie_id[0].item()
 
     movie_id = int(pred_tensor)
-    _, title, released_year, runtime, genre, imdb_rating, director = training_set.__getitem__(movie_id)
+    _, title, released_year, runtime, genre, imdb_rating, director = data_set.__getitem__(movie_id)
 
     print(f"Predicted movie")
     print(f"----------------")
