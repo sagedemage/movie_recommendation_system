@@ -4,13 +4,14 @@ Movie recommendation system written in Python with PyTorch.
 ## Source of the IMDB Movies Dataset
 [IMDB Movies Dataset - kaggle](https://www.kaggle.com/datasets/harshitshankhdhar/imdb-dataset-of-top-1000-movies-and-tv-shows)
 
-## 1. Create Validation Data
+## Usage Instructions
+### 1. Create Validation Data
 1.1 Create validation data with the index of the row:
 ```
 python3 generate_validation_data.py 21
 ```
 
-## 2. Train a Model
+### 2. Train a Model
 2.1 Make sure to create the `trained_models` directory before training a model
 ```
 mkdir trained_models
@@ -26,11 +27,39 @@ tensorboard --logdir=runs
 python3 train_model.py
 ```
 
-## 3. Run Program
+### 3. Run Program
 3.1 Run the program with the file path of the model
 ```
 python3 main.py trained_models/model_20241012_195623_0.pt
 ```
+
+## Accuracy of the Model
+
+A user chooses this as their favorite movie:
+- Movie_ID: 22
+- Series_Title: Cidade de Deus
+- Released_Year: 2002
+- Certificate: A
+- Runtime: 130 min
+- Genre: Crime, Drama
+- IMDB_Rating: 8.6
+- Overview: In the slums of Rio, two kids' paths diverge a...
+- Meta_score: 79.0
+- Director: Fernando Meirelles
+- Star1: Kátia Lund
+- Star2: Alexandre Rodrigues
+- No_of_Votes: 699256
+- Gross: 7563397.0
+
+Here are the results after running the movie recommendation program 100 times:
+- Number of correct recommendations: 73
+- Number of incorrect recommendations: 27
+- Total number of recommendations: 100
+- Accuracy of the recommendations: 73%
+
+The accuracy of the model is 73%. There is certainly more work that has to be
+done to get it to a 90% accuracy. An accuracy close to 75% is not too bad for
+a demo project.
 
 ## Resource
 - [PyTorch Website](https://pytorch.org)
