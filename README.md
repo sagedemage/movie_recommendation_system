@@ -56,12 +56,12 @@ become a photographer and the other a kingpin.
 
 ### 1. Result
 Here is the result after running the movie recommendation program 100 times:
-- Accuracy of the recommendations: 78%
+- Accuracy of the recommendations: 74%
 
 **Note**: The `measure_accuracy.py` script runs the program 100 times for me.
 
-The accuracy of the model is 78%. There is certainly more work that has to be
-done to get it to a 90% accuracy. An accuracy above 75% is good for a demo
+The accuracy of the model is 74%. There is certainly more work that has to be
+done to get it to a 90% accuracy. An accuracy close to 75% is not too bad for a demo
 project.
 
 ## Resource
