@@ -7,7 +7,7 @@ from datetime import datetime
 
 from torch.utils.tensorboard import SummaryWriter
 
-from ml.dataset import CustomDataset
+from ml.dataset import MovieDataset
 from ml.model import NeuralNetwork
 
 from config import CSV_DATASET, CSV_VALIDATION_DATASET
@@ -57,8 +57,8 @@ def train_one_epoch(epoch_index, tb_writer: SummaryWriter, training_loader: Data
         return last_loss
 
 def main():
-    training_set = CustomDataset(CSV_DATASET)
-    validation_set = CustomDataset(CSV_VALIDATION_DATASET)
+    training_set = MovieDataset(CSV_DATASET)
+    validation_set = MovieDataset(CSV_VALIDATION_DATASET)
 
     print("Length of training set: " + str(training_set.__len__()))
     print("Length of validation set: " + str(validation_set.__len__()))

@@ -2,7 +2,7 @@ import sys
 import torch
 from torch.utils.data import DataLoader
 from torch import nn
-from ml.dataset import CustomDataset
+from ml.dataset import MovieDataset
 from ml.model import NeuralNetwork
 
 from config import CSV_DATASET
@@ -25,7 +25,7 @@ def main():
         else "cpu"
     )
 
-    data_set = CustomDataset(CSV_DATASET)
+    data_set = MovieDataset(CSV_DATASET)
     data_loader = DataLoader(data_set, batch_size=BATCH_SIZE, shuffle=True)
 
     data_movie_id, data_title, data_released_year, data_runtime, data_genre, data_imdb_rating, data_director = next(
@@ -45,7 +45,7 @@ def main():
     pred_tensor = pred_probab[y_pred]
 
     movie_id = int(pred_tensor)
-    _, title, released_year, runtime, genre, imdb_rating, director = data_set.__getitem__(movie_id)
+    title, released_year, runtime, genre, imdb_rating, director = data_set.get_item_by_movie_id(movie_id)
 
     print(f"Predicted movie")
     print(f"----------------")
