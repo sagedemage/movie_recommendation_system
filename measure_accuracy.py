@@ -12,7 +12,6 @@ def main():
     file = open('validation_data/picked_movie.txt', 'r')
     genre_list = []
     for line in file:
-        #print(line)
         if line[0:6] == "Genre:":
             line = line.replace("Genre:", "")
             line = line.replace(" ", "")
