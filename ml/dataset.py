@@ -44,7 +44,6 @@ class MovieDataset(Dataset):
         director = row["Director"]
 
         if self.target_transform:
-            #movie_id = self.target_transform(movie_id)
             title = self.target_transform(title)
             released_year = self.target_transform(released_year)
             runtime = self.target_transform(runtime)
