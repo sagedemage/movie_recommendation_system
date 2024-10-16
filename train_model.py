@@ -100,7 +100,7 @@ def main():
     loss_fn = torch.nn.L1Loss()
 
     # Optimizer
-    optimizer = torch.optim.SGD(model.parameters(), lr=LEARNING_RATE)
+    optimizer = torch.optim.SGD(model.parameters(), lr=LEARNING_RATE, momentum=0.9)
 
     # Training Loop
     timestamp = datetime.now().strftime('%Y%m%d_%H%M%S')
