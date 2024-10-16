@@ -46,7 +46,7 @@ A user chooses this as their favorite movie:
 - Genre: Crime, Drama
 - IMDB_Rating: 8.6
 - Overview: In the slums of Rio, two kids' paths diverge as one struggles to
-- become a photographer and the other a kingpin.
+become a photographer and the other a kingpin.
 - Meta_score: 79.0
 - Director: Fernando Meirelles
 - Star1: Kátia Lund
