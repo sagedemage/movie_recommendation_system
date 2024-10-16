@@ -8,7 +8,7 @@ Movie recommendation system written in Python with PyTorch.
 
 ## Usage Instructions
 ### 1. Create Validation Data
-1.1 Create validation data with the index of the row:
+1.1 Create a validation data with the index of the row:
 ```
 python3 generate_validation_data.py 21
 ```
