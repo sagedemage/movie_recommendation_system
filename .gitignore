@@ -2,8 +2,16 @@
 __pycache__/
 venv/
 
+# PyTorch
+runs/
+trained_models/
+validation_data/
+
 # PyCharm Python IDE
 .idea/
 
 # OpenDocument Spreadsheet files used with LibreOffice and OpenOffice
 *.ods
+
+# Media files
+*.xcf

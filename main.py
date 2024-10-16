@@ -1,73 +1,62 @@
+import sys
 import torch
 from torch.utils.data import DataLoader
 from torch import nn
-import matplotlib.pyplot as plt
+from ml.dataset import MovieDataset
+from ml.model import NeuralNetwork
 
-from dataset import CustomDataset
-from neural_network import NeuralNetwork
+from config import CSV_DATASET
 
-csv_dataset_file = 'data/imdb_top_1000.csv'
+BATCH_SIZE = 4
 
-dataset = CustomDataset(csv_dataset_file)
+def main():
+    if len(sys.argv) < 2:
+        print("Missing the model file path!")
+        exit()
+    args = sys.argv
+    # Use trained model
+    model_path = args[1]
 
-print("Length: " + str(dataset.__len__()))
-print("")
+    device = (
+        "cuda"
+        if torch.cuda.is_available()
+        else "mps"
+        if torch.backends.mps.is_available()
+        else "cpu"
+    )
 
-movie_id, title, released_year, runtime, genre, imdb_rating, director = dataset.__getitem__(0)
-print(f"Movie ID: {movie_id}")
-print(f"Title: {title}")
-print(f"Released Year: {released_year}")
-print(f"Runtime: {runtime}")
-print(f"Genre: {genre}")
-print(f"IMDB Rating: {imdb_rating}")
-print(f"Director: {director}")
-print("")
+    data_set = MovieDataset(CSV_DATASET)
+    data_loader = DataLoader(data_set, batch_size=BATCH_SIZE, shuffle=True)
 
-# batch_size (int, optional) – how many samples per batch to load (default: 1).
-train_dataloader = DataLoader(dataset, batch_size=64, shuffle=True)
+    data_movie_id, data_title, data_released_year, data_runtime, data_genre, data_imdb_rating, data_director = next(
+        iter(data_loader))
 
-train_movie_id, train_title, train_released_year, train_runtime, train_genre, train_imdb_rating, train_director = next(iter(train_dataloader))
+    # Load a saved version of the model
+    saved_model = NeuralNetwork().to(device)
+    saved_model.load_state_dict(torch.load(model_path, weights_only=True))
 
-device = (
-    "cuda"
-    if torch.cuda.is_available()
-    else "mps"
-    if torch.backends.mps.is_available()
-    else "cpu"
-)
+    # Perform a transform on the data for it to be usable for the model
+    data_movie_id = data_movie_id.to(device)
+    data_movie_id = data_movie_id.type(torch.float32)
 
-print(f"Using {device} device")
-print("")
+    logits = saved_model(data_movie_id)
+    pred_probab = nn.Softplus()(logits)
+    y_pred = pred_probab.argmax(0)
+    pred_tensor = pred_probab[y_pred]
 
-model = NeuralNetwork().to(device)
+    movie_id = int(pred_tensor)
+    title, released_year, runtime, genre, imdb_rating, director = data_set.get_item_by_movie_id(movie_id)
 
-# Perform a transform on the data for it to be usable for the model
-X = train_movie_id.unsqueeze(0)
-X = X.to(device)
-X = X.type(torch.float32)
+    print(f"Predicted movie")
+    print(f"----------------")
+    print(f"Movie ID: {movie_id}")
+    print(f"Title: {title}")
+    print(f"Released Year: {released_year}")
+    print(f"Runtime: {runtime}")
+    print(f"Genre: {genre}")
+    print(f"IMDB Rating: {imdb_rating}")
+    print(f"Director: {director}")
+    print("")
 
-print(f"Shape: {X.shape}")
-print(f"Datatype: {X.dtype}")
-print(f"Device: {X.device}")
-print("")
-
-logits = model(X)
-pred_probab = nn.Softmax(dim=1)(logits)
-y_pred = pred_probab.argmax(1)
-pred_tensor = X[0][y_pred]
-print(f"Predicted class: {y_pred}")
-print("")
-
-movie_id = int(pred_tensor[0])
-_, title, released_year, runtime, genre, imdb_rating, director = dataset.__getitem__(movie_id)
-
-print(f"Predicted movie")
-print(f"----------------")
-print(f"Movie ID: {movie_id}")
-print(f"Title: {title}")
-print(f"Released Year: {released_year}")
-print(f"Runtime: {runtime}")
-print(f"Genre: {genre}")
-print(f"IMDB Rating: {imdb_rating}")
-print(f"Director: {director}")
-print("")
+if __name__ == "__main__":
+    main()
