@@ -18,7 +18,6 @@ LOG_DATA_DIR = "runs/"
 BATCH_SIZE = 4
 EPOCHS = 130
 LEARNING_RATE = 0.000005
-MOMENTUM = 0.9
 
 def train_one_epoch(epoch_index, tb_writer: SummaryWriter, training_loader: DataLoader, optimizer: SGD, device: str, model: NeuralNetwork, loss_fn: L1Loss):
     running_loss = 0.
@@ -101,7 +100,7 @@ def main():
     loss_fn = torch.nn.L1Loss()
 
     # Optimizer
-    optimizer = torch.optim.SGD(model.parameters(), lr=LEARNING_RATE, momentum=MOMENTUM)
+    optimizer = torch.optim.SGD(model.parameters(), lr=LEARNING_RATE)
 
     # Training Loop
     timestamp = datetime.now().strftime('%Y%m%d_%H%M%S')
