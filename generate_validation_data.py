@@ -28,6 +28,7 @@ def main():
         file.write(buf)
     file.write("\n")
     file.write(str(pick_genre_list))
+    file.close()
 
     print(pick_row)
     print(pick_genre_list)
