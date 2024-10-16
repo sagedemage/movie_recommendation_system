@@ -51,8 +51,8 @@ A user chooses this as their favorite movie:
 - No_of_Votes: 699256
 - Gross: 7563397.0
 
-### 1. Results
-Here are the results after running the movie recommendation program 100 times:
+### 1. Result
+Here is the result after running the movie recommendation program 100 times:
 - Accuracy of the recommendations: 78%
 
 **Note**: The `measure_accuracy.py` script runs the program 100 times for me.
