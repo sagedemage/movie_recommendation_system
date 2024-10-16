@@ -64,16 +64,6 @@ def main():
     print("Length of validation set: " + str(validation_set.__len__()))
     print("")
 
-    movie_id, title, released_year, runtime, genre, imdb_rating, director = training_set.__getitem__(0)
-    print(f"Movie ID: {movie_id}")
-    print(f"Title: {title}")
-    print(f"Released Year: {released_year}")
-    print(f"Runtime: {runtime}")
-    print(f"Genre: {genre}")
-    print(f"IMDB Rating: {imdb_rating}")
-    print(f"Director: {director}")
-    print("")
-
     # batch_size (int, optional) – how many samples per batch to load (default: 1).
     training_loader = DataLoader(training_set, batch_size=BATCH_SIZE, shuffle=True)
     validation_loader = DataLoader(validation_set, batch_size=BATCH_SIZE, shuffle=False)
