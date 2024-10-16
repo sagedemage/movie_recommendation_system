@@ -57,9 +57,9 @@ Here are the results after running the movie recommendation program 100 times:
 
 **Note**: The `measure_accuracy.py` script runs the program 100 times for me.
 
-The accuracy of the model is 72%. There is certainly more work that has to be
-done to get it to a 90% accuracy. An accuracy close to 75% is not too bad for
-a demo project.
+The accuracy of the model is 78%. There is certainly more work that has to be
+done to get it to a 90% accuracy. An accuracy above 75% is good for a demo
+project.
 
 ## Resource
 - [PyTorch Website](https://pytorch.org)
