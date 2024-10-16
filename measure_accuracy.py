@@ -34,9 +34,10 @@ def main():
                 line = line.replace(" ", "")
                 line = line.replace("\n", "")
                 r_genre_list = line.split(",")
+                break
 
-        for i in range(len(r_genre_list)):
-            if r_genre_list[i] in genre_list:
+        for j in range(len(r_genre_list)):
+            if r_genre_list[j] in genre_list:
                 correct += 1
                 break
 
