@@ -14,23 +14,23 @@ python3 generate_validation_data.py 21
 ```
 
 ### 2. Train a Model
-2.1 Make sure to create the `trained_models` directory before training a model
+2.1 Make sure to create the `trained_models` directory before training a model:
 ```
 mkdir trained_models
 ```
 
-2.2 Start TensorBoard
+2.2 Start TensorBoard:
 ```
 tensorboard --logdir=runs
 ```
 
-2.3 Train a model
+2.3 Train a model:
 ```
 python3 train_model.py
 ```
 
 ### 3. Run Program
-3.1 Run the program with the file path of the model
+3.1 Run the program with the file path of the model:
 ```
 python3 main.py trained_models/model_20241012_195623_0.pt
 ```
