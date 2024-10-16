@@ -23,8 +23,10 @@ def main():
     pick_genre_list = pick_genre.split(",")
 
     file = open('validation_data/picked_movie.txt', 'w')
-    file.write(str(pick_row))
-    file.write("\n\n")
+    for col in df_data.columns:
+        buf = f"{col}: {pick_row[col]}\n"
+        file.write(buf)
+    file.write("\n")
     file.write(str(pick_genre_list))
 
     print(pick_row)
