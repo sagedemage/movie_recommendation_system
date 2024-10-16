@@ -1,6 +1,8 @@
 # movie_recommendation_system
 Movie recommendation system written in Python with PyTorch.
 
+![Movie Recommendation System](./screenshot/movie_recommendation_system.webp)
+
 ## Source of the IMDB Movies Dataset
 [IMDB Movies Dataset - kaggle](https://www.kaggle.com/datasets/harshitshankhdhar/imdb-dataset-of-top-1000-movies-and-tv-shows)
 

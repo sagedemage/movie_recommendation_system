@@ -13,3 +13,6 @@ validation_data/
 
 # OpenDocument Spreadsheet files used with LibreOffice and OpenOffice
 *.ods
+
+# Media files
+*.xcf
