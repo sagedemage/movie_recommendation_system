@@ -3,8 +3,8 @@
 from torch import nn
 
 
-class NeuralNetwork(nn.Module):
-    """Define a Model for Movies"""
+class MovieRecommendation(nn.Module):
+    """Define a Model for Movie Recommendations"""
 
     def __init__(self):
         super().__init__()

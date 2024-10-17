@@ -10,7 +10,7 @@ from datetime import datetime
 from torch.utils.tensorboard import SummaryWriter
 
 from ml.dataset import MovieDataset
-from ml.model import NeuralNetwork
+from ml.model import MovieRecommendation
 
 from config import CSV_DATASET, CSV_VALIDATION_DATASET
 
@@ -29,7 +29,7 @@ def train_one_epoch(
     training_loader: DataLoader,
     optimizer: SGD,
     device: str,
-    model: NeuralNetwork,
+    model: MovieRecommendation,
     loss_fn: L1Loss,
 ):
     running_loss = 0.0
@@ -96,7 +96,7 @@ def main():
     print("")
 
     # Model
-    model = NeuralNetwork().to(device)
+    model = MovieRecommendation().to(device)
 
     # Loss Function
     loss_fn = torch.nn.L1Loss()

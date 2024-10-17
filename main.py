@@ -5,7 +5,7 @@ import torch
 from torch.utils.data import DataLoader
 from torch import nn
 from ml.dataset import MovieDataset
-from ml.model import NeuralNetwork
+from ml.model import MovieRecommendation
 
 from config import CSV_DATASET
 
@@ -32,7 +32,7 @@ def main():
     data_movie_id = next(iter(data_loader))
 
     # Load a saved version of the model
-    saved_model = NeuralNetwork().to(device)
+    saved_model = MovieRecommendation().to(device)
     saved_model.load_state_dict(torch.load(model_path, weights_only=True))
 
     # Perform a transform on the data for it to be usable for the model
