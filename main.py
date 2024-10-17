@@ -11,6 +11,7 @@ from config import CSV_DATASET
 
 BATCH_SIZE = 4
 
+
 def main():
     if len(sys.argv) < 2:
         print("Missing the model file path!")
@@ -22,16 +23,13 @@ def main():
     device = (
         "cuda"
         if torch.cuda.is_available()
-        else "mps"
-        if torch.backends.mps.is_available()
-        else "cpu"
+        else "mps" if torch.backends.mps.is_available() else "cpu"
     )
 
     data_set = MovieDataset(CSV_DATASET)
     data_loader = DataLoader(data_set, batch_size=BATCH_SIZE, shuffle=True)
 
-    data_movie_id = next(
-        iter(data_loader))
+    data_movie_id = next(iter(data_loader))
 
     # Load a saved version of the model
     saved_model = NeuralNetwork().to(device)
@@ -47,7 +45,9 @@ def main():
     pred_tensor = pred_probab[y_pred]
 
     movie_id = int(pred_tensor)
-    title, released_year, runtime, genre, imdb_rating, director = data_set.get_item_by_movie_id(movie_id)
+    title, released_year, runtime, genre, imdb_rating, director = (
+        data_set.get_item_by_movie_id(movie_id)
+    )
 
     print("Predicted movie")
     print("----------------")
@@ -59,6 +59,7 @@ def main():
     print(f"IMDB Rating: {imdb_rating}")
     print(f"Director: {director}")
     print("")
+
 
 if __name__ == "__main__":
     main()

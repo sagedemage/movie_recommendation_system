@@ -3,8 +3,10 @@
 import pandas as pd
 from torch.utils.data import Dataset
 
+
 class MovieDataset(Dataset):
     """Dataset for loading Movie CSV Data"""
+
     def __init__(self, file_name: str, transform=None, target_transform=None):
         self.df_data = pd.read_csv(file_name)
         self.transform = transform

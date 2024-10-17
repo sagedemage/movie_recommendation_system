@@ -3,6 +3,7 @@
 import os
 import sys
 
+
 def main():
     if len(sys.argv) < 2:
         print("Missing the model file path!")
@@ -44,6 +45,7 @@ def main():
 
     acc_per = correct
     print(f"Accuracy of {acc_per}%")
+
 
 if __name__ == "__main__":
     main()

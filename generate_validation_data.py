@@ -5,6 +5,7 @@ import sys
 
 from config import CSV_DATASET, CSV_VALIDATION_DATASET
 
+
 def main():
     if len(sys.argv) < 2:
         print("Missing the index of the row!")
@@ -13,8 +14,7 @@ def main():
     # Index of the row
     row_index = int(args[1])
 
-    write_data = {
-    }
+    write_data = {}
 
     df_data = pd.read_csv(CSV_DATASET)
 
@@ -71,6 +71,7 @@ def main():
 
     # Write the data to a CSV file
     df_write_data.to_csv(CSV_VALIDATION_DATASET, index=False)
+
 
 if __name__ == "__main__":
     main()

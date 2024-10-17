@@ -2,12 +2,14 @@
 
 from torch import nn
 
+
 class NeuralNetwork(nn.Module):
     """Define a Model for Movies"""
+
     def __init__(self):
         super().__init__()
         self.linear_relu_stack = nn.Sequential(
-            nn.Linear(4*1, 512),
+            nn.Linear(4 * 1, 512),
             nn.ReLU(),
             nn.Linear(512, 512),
             nn.ReLU(),
