@@ -24,7 +24,7 @@ LEARNING_RATE = 0.000005
 
 
 def train_one_epoch(
-    epoch_index,
+    epoch_index: int,
     tb_writer: SummaryWriter,
     training_loader: DataLoader,
     optimizer: SGD,
