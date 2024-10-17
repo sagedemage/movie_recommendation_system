@@ -32,8 +32,10 @@ python3 train_model.py
 ### 3. Run Program
 3.1 Run the program with the file path of the model:
 ```
-python3 main.py trained_models/model_20241012_195623_0.pt
+python3 main.py trained_models/model_20241017_124650_93.pt
 ```
+
+**Note**: It is a good idea to pick a model with the highest number of epochs.
 
 ## Accuracy of the Model
 
