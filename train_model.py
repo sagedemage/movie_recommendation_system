@@ -1,3 +1,5 @@
+"""Training a Movie Model"""
+
 import torch
 from torch.utils.data import DataLoader
 from torch.optim import SGD
@@ -24,7 +26,7 @@ def train_one_epoch(epoch_index, tb_writer: SummaryWriter, training_loader: Data
     last_loss = 0.
 
     for i, data in enumerate(training_loader):
-        movie_id, title, released_year, runtime, genre, imdb_rating, director = data
+        movie_id = data
 
         # Zero the gradients for every batch!
         optimizer.zero_grad()
@@ -49,9 +51,9 @@ def train_one_epoch(epoch_index, tb_writer: SummaryWriter, training_loader: Data
         running_loss += loss.item()
         if i % 1000 == 999:
             last_loss = running_loss / 1000 # loss per batch
-            print('batch {} loss: {}'.format(i + 1, last_loss))
+            print(f"batch {i + 1} loss: {last_loss}")
             tb_x = epoch_index * len(training_loader) + i + 1
-            tb_writer.add_scalar('Loss/train', last_loss, tb_x)
+            tb_writer.add_scalar("Loss/train", last_loss, tb_x)
             running_loss = 0.
 
         return last_loss
@@ -60,8 +62,8 @@ def main():
     training_set = MovieDataset(CSV_DATASET)
     validation_set = MovieDataset(CSV_VALIDATION_DATASET)
 
-    print("Length of training set: " + str(training_set.__len__()))
-    print("Length of validation set: " + str(validation_set.__len__()))
+    print(f"Length of training set: {len(training_set)}")
+    print(f"Length of validation set: {len(validation_set)}")
     print("")
 
     # batch_size (int, optional) – how many samples per batch to load (default: 1).
@@ -69,8 +71,8 @@ def main():
     validation_loader = DataLoader(validation_set, batch_size=BATCH_SIZE, shuffle=False)
 
     # Report split sizes
-    print('Training set has {} instances'.format(len(training_set)))
-    print('Validation set has {} instances'.format(len(validation_set)))
+    print(f"Training set has {len(training_set)} instances")
+    print(f"Validation set has {len(validation_set)} instances")
 
     device = (
         "cuda"
@@ -93,13 +95,13 @@ def main():
     optimizer = torch.optim.SGD(model.parameters(), lr=LEARNING_RATE)
 
     # Training Loop
-    timestamp = datetime.now().strftime('%Y%m%d_%H%M%S')
-    writer = SummaryWriter(LOG_DATA_DIR + 'movie_trainer_{}'.format(timestamp))
+    timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
+    writer = SummaryWriter(LOG_DATA_DIR + f"movie_trainer_{timestamp}")
     epoch_number = 0
     best_vloss = 1_000_000.
 
-    for epoch in range(EPOCHS):
-        print('EPOCH {}:'.format(epoch_number + 1))
+    for _ in range(EPOCHS):
+        print(f"EPOCH {epoch_number + 1}:")
 
         # Make sure gradient tracking is on, and do a pass over the data
         model.train(True)
@@ -112,8 +114,8 @@ def main():
 
         # Disable gradient computation and reduce memory consumption
         with torch.no_grad():
-            for i, vdata in enumerate(validation_loader):
-                vmovie_id, vtitle, vreleased_year, vruntime, vgenre, vimdb_rating, vdirector = vdata
+            for _, vdata in enumerate(validation_loader):
+                vmovie_id = vdata
 
                 vmovie_id = vmovie_id.to(device)
                 vmovie_id = vmovie_id.type(torch.float32)
@@ -122,19 +124,19 @@ def main():
                 vloss = loss_fn(voutputs, vmovie_id)
                 running_vloss += vloss
 
-        avg_vloss = running_vloss / (i + 1)
-        print('LOSS train {} valid {}'.format(avg_loss, avg_vloss))
+        avg_vloss = running_vloss / (len(validation_loader))
+        print(f"LOSS train {avg_loss} valid {avg_vloss}")
 
         # Log the running loss average per batch
         # for both training and validation
-        writer.add_scalars('Training vs. Validation Loss', {'Training': avg_loss, 'Validation': avg_vloss}, epoch_number + 1)
+        writer.add_scalars("Training vs. Validation Loss", {"Training": avg_loss, "Validation": avg_vloss}, epoch_number + 1)
         writer.flush()
 
         # Track the best performance, and save the model's state
         if avg_vloss < best_vloss:
             best_vloss = avg_vloss
             # Save the model's state
-            model_path = TRAINED_MODEL_DIR + 'model_{}_{}.pt'.format(timestamp, epoch_number)
+            model_path = TRAINED_MODEL_DIR + f"model_{timestamp}_{epoch_number}.pt"
             torch.save(model.state_dict(), model_path)
 
         epoch_number += 1

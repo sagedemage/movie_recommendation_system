@@ -1,3 +1,5 @@
+"""Measure the accuracy of the trained model"""
+
 import os
 import sys
 
@@ -9,7 +11,7 @@ def main():
     # Use trained model
     model_path = args[1]
 
-    file = open('validation_data/picked_movie.txt', 'r')
+    file = open("validation_data/picked_movie.txt", "r", encoding="utf-8")
     genre_list = []
     for line in file:
         if line[0:6] == "Genre:":
@@ -22,7 +24,7 @@ def main():
 
     correct = 0
 
-    for i in range(100):
+    for _ in range(100):
         result = os.popen("python3 main.py " + model_path)
 
         r_genre_list = []

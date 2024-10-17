@@ -1,6 +1,9 @@
+"""Structure of the Model"""
+
 from torch import nn
 
 class NeuralNetwork(nn.Module):
+    """Define a Model for Movies"""
     def __init__(self):
         super().__init__()
         self.linear_relu_stack = nn.Sequential(

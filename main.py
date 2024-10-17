@@ -1,3 +1,5 @@
+"""Movie Recommendation Program"""
+
 import sys
 import torch
 from torch.utils.data import DataLoader
@@ -28,7 +30,7 @@ def main():
     data_set = MovieDataset(CSV_DATASET)
     data_loader = DataLoader(data_set, batch_size=BATCH_SIZE, shuffle=True)
 
-    data_movie_id, data_title, data_released_year, data_runtime, data_genre, data_imdb_rating, data_director = next(
+    data_movie_id = next(
         iter(data_loader))
 
     # Load a saved version of the model
@@ -47,8 +49,8 @@ def main():
     movie_id = int(pred_tensor)
     title, released_year, runtime, genre, imdb_rating, director = data_set.get_item_by_movie_id(movie_id)
 
-    print(f"Predicted movie")
-    print(f"----------------")
+    print("Predicted movie")
+    print("----------------")
     print(f"Movie ID: {movie_id}")
     print(f"Title: {title}")
     print(f"Released Year: {released_year}")

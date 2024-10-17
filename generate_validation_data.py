@@ -1,3 +1,5 @@
+"""Generate a validation dataset based on the movie the user picks"""
+
 import pandas as pd
 import sys
 
@@ -22,7 +24,7 @@ def main():
     pick_genre = pick_genre.replace(" ", "")
     pick_genre_list = pick_genre.split(",")
 
-    file = open('validation_data/picked_movie.txt', 'w')
+    file = open("validation_data/picked_movie.txt", "w", encoding="utf-8")
     for col in df_data.columns:
         buf = f"{col}: {pick_row[col]}\n"
         file.write(buf)
