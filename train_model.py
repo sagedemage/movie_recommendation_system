@@ -71,10 +71,6 @@ def main():
     training_set = MovieDataset(CSV_DATASET)
     validation_set = MovieDataset(CSV_VALIDATION_DATASET)
 
-    print(f"Length of training set: {len(training_set)}")
-    print(f"Length of validation set: {len(validation_set)}")
-    print("")
-
     training_loader = DataLoader(
         training_set, batch_size=BATCH_SIZE, shuffle=True
     )
@@ -82,9 +78,10 @@ def main():
         validation_set, batch_size=BATCH_SIZE, shuffle=False
     )
 
-    # Report split sizes
+    # Report the sizes of the datasets
     print(f"Training set has {len(training_set)} instances")
     print(f"Validation set has {len(validation_set)} instances")
+    print("")
 
     device = (
         "cuda"
