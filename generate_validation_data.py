@@ -5,6 +5,8 @@ import sys
 
 from config import CSV_DATASET, CSV_VALIDATION_DATASET
 
+PICKED_MOVIE_TEXT_FILE = "validation_data/picked_movie.txt"
+
 
 def main():
     if len(sys.argv) < 2:
@@ -24,7 +26,7 @@ def main():
     pick_genre = pick_genre.replace(" ", "")
     pick_genre_list = pick_genre.split(",")
 
-    file = open("validation_data/picked_movie.txt", "w", encoding="utf-8")
+    file = open(PICKED_MOVIE_TEXT_FILE, "w", encoding="utf-8")
     for col in df_data.columns:
         buf = f"{col}: {pick_row[col]}\n"
         file.write(buf)
@@ -66,11 +68,13 @@ def main():
     if num_rows % 4 != 0:
         rem = num_rows % 4
         df_write_data = df_write_data.drop(df_write_data.tail(rem).index)
-        print(f"Number of rows: {num_rows}")
-        print(f"Remainder: {rem}")
 
     # Write the data to a CSV file
     df_write_data.to_csv(CSV_VALIDATION_DATASET, index=False)
+
+    # Display message
+    print(f"Written the csv file to {CSV_VALIDATION_DATASET}")
+    print(f"Written picked movie information to {PICKED_MOVIE_TEXT_FILE}")
 
 
 if __name__ == "__main__":
