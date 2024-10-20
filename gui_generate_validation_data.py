@@ -1,3 +1,8 @@
+"""
+Generate a validation dataset based on the
+movie the user picks via a GUI interface
+"""
+
 import tkinter as tk
 from tkinter import ttk
 from tkinter import Frame, Scrollbar
@@ -5,30 +10,50 @@ from tkinter.constants import CENTER, RIGHT, Y, NO, LEFT, BOTH, BOTTOM, X
 
 from config import CSV_DATASET, CSV_VALIDATION_DATASET
 import pandas as pd
+
 WINDOW_WIDTH = 640
 WINDOW_HEIGHT = 480
 WINDOW_X_POS = 50
 WINDOW_Y_POS = 85
 
+
 def main():
     df_data = pd.read_csv(CSV_DATASET)
     root = tk.Tk()
     root.title("Test window")
-    root.geometry(f"{WINDOW_WIDTH}x{WINDOW_HEIGHT}+{WINDOW_X_POS}+{WINDOW_Y_POS}")
+    root.geometry(
+        f"{WINDOW_WIDTH}x{WINDOW_HEIGHT}+{WINDOW_X_POS}+{WINDOW_Y_POS}"
+    )
     frame = Frame(root)
-    w = tk.Label(root, text="Pick your favorite movie. Press enter to choose the movie.")
+    w = tk.Label(
+        root, text="Pick your favorite movie. Press enter to choose the movie."
+    )
     w.pack()
     frame.pack()
 
     y_scroll_bar = Scrollbar(frame)
-    y_scroll_bar.pack(side = RIGHT, fill = Y)
+    y_scroll_bar.pack(side=RIGHT, fill=Y)
 
     x_scroll_bar = Scrollbar(frame, orient="horizontal")
-    x_scroll_bar.pack(side = BOTTOM, fill = X)
+    x_scroll_bar.pack(side=BOTTOM, fill=X)
 
-    table = ttk.Treeview(frame, yscrollcommand=y_scroll_bar.set, xscrollcommand=x_scroll_bar.set, selectmode="browse", height=22)
+    table = ttk.Treeview(
+        frame,
+        yscrollcommand=y_scroll_bar.set,
+        xscrollcommand=x_scroll_bar.set,
+        selectmode="browse",
+        height=22,
+    )
     columns = df_data.columns
-    table["columns"] = (columns[0], columns[1], columns[2], columns[4], columns[5], columns[6], columns[9])
+    table["columns"] = (
+        columns[0],
+        columns[1],
+        columns[2],
+        columns[4],
+        columns[5],
+        columns[6],
+        columns[9],
+    )
 
     column_width = 160
     table.column("#0", width=0, stretch=NO)
@@ -57,7 +82,15 @@ def main():
         genre = df_data.iloc[i]["Genre"]
         imdb_rating = df_data.iloc[i]["IMDB_Rating"]
         director = df_data.iloc[i]["Director"]
-        r_values = (movie_id, series_title, released_year, runtime, genre, imdb_rating, director)
+        r_values = (
+            movie_id,
+            series_title,
+            released_year,
+            runtime,
+            genre,
+            imdb_rating,
+            director,
+        )
         table.insert(parent="", index="end", iid=i, text="", values=r_values)
 
     def item_selected(event):
@@ -72,9 +105,9 @@ def main():
     table.bind("<Return>", item_selected)
     y_scroll_bar.config(command=table.yview)
     x_scroll_bar.config(command=table.xview)
-    table.pack(side = LEFT, fill = BOTH)
+    table.pack(side=LEFT, fill=BOTH)
     root.mainloop()
+
 
 if __name__ == "__main__":
     main()
-
