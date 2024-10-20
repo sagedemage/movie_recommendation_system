@@ -71,6 +71,7 @@ def main():
         rem = num_rows % 4
         df_write_data = df_write_data.drop(df_write_data.tail(rem).index)
 
+    # 4. Write the data to a CSV file.
     df_write_data.to_csv(CSV_VALIDATION_DATASET, index=False)
 
     print(f"Written the csv file to {CSV_VALIDATION_DATASET}")
