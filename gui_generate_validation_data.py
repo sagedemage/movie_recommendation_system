@@ -17,6 +17,7 @@ WINDOW_X_POS = 50
 WINDOW_Y_POS = 85
 PICKED_MOVIE_TEXT_FILE = "validation_data/picked_movie.txt"
 
+
 def main():
     df_data = pd.read_csv(CSV_DATASET)
     root = tk.Tk()
@@ -64,7 +65,6 @@ def main():
     table.column(columns[5], anchor=CENTER, width=column_width)
     table.column(columns[6], anchor=CENTER, width=100)
     table.column(columns[9], anchor=CENTER, width=column_width)
-
 
     table.heading("#0", text="", anchor=CENTER)
     table.heading(columns[0], text="Movie ID", anchor=CENTER)
@@ -120,8 +120,9 @@ def main():
         file.write(str(pick_genre_list))
         file.close()
 
-        # 2. Add movies where one of their genres is in the picked movie's genre.
-        # This is to use as training data for recommendation of movies.
+        # 2. Add movies where one of their genres is in the picked
+        # movie's genre. This is to use as training data for
+        # recommendation of movies.
         write_data = {}
 
         for i in range(len(columns)):
@@ -147,8 +148,7 @@ def main():
         num_rows = df_write_data.shape[0]
 
         # Make sure the length of the dataset is divisible by 4
-        # This is required for it to work with a batch size of 4
-        # for training
+        # This is required for it to work with a batch size of 4 for training
         if num_rows % 4 != 0:
             rem = num_rows % 4
             df_write_data = df_write_data.drop(df_write_data.tail(rem).index)
@@ -157,7 +157,9 @@ def main():
         df_write_data.to_csv(CSV_VALIDATION_DATASET, index=False)
 
         print(f"Written the csv file to {CSV_VALIDATION_DATASET}")
-        print(f"Written the picked movie information to {PICKED_MOVIE_TEXT_FILE}")
+        print(
+            f"Written the picked movie information to {PICKED_MOVIE_TEXT_FILE}"
+        )
         print("")
 
     table.bind("<Return>", item_selected)
