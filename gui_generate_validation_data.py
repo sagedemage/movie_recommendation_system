@@ -15,7 +15,7 @@ WINDOW_WIDTH = 640
 WINDOW_HEIGHT = 480
 WINDOW_X_POS = 50
 WINDOW_Y_POS = 85
-
+PICKED_MOVIE_TEXT_FILE = "validation_data/picked_movie.txt"
 
 def main():
     df_data = pd.read_csv(CSV_DATASET)
@@ -65,9 +65,10 @@ def main():
     table.column(columns[6], anchor=CENTER, width=100)
     table.column(columns[9], anchor=CENTER, width=column_width)
 
+
     table.heading("#0", text="", anchor=CENTER)
     table.heading(columns[0], text="Movie ID", anchor=CENTER)
-    table.heading(columns[1], text="Series Titles", anchor=CENTER)
+    table.heading(columns[1], text="Series Title", anchor=CENTER)
     table.heading(columns[2], text="Released Year", anchor=CENTER)
     table.heading(columns[4], text="Runtime", anchor=CENTER)
     table.heading(columns[5], text="Genre", anchor=CENTER)
@@ -94,6 +95,8 @@ def main():
         table.insert(parent="", index="end", iid=i, text="", values=r_values)
 
     def item_selected(event):
+        # 1. Retrieve the information of the picked movie
+        # Pick a movie
         selected_index = table.focus()
         selected_item = table.item(selected_index)
         item_values = selected_item["values"]
@@ -101,6 +104,61 @@ def main():
         pick_genre_list = pick_genre.split(", ")
         print(f"Row: {item_values}")
         print(f"Genre: {pick_genre_list}")
+
+        # Log the information of the movie to remember what movie the user chose
+        file = open(PICKED_MOVIE_TEXT_FILE, "w", encoding="utf-8")
+
+        movie_id = item_values[0]
+        row = df_data.iloc[movie_id]
+        columns = df_data.columns
+        index = 0
+        for col in columns:
+            buf = f"{col}: {row[col]}\n"
+            file.write(buf)
+            index += 1
+        file.write("\n")
+        file.write(str(pick_genre_list))
+        file.close()
+
+        # 2. Add movies where one of their genres is in the picked movie's genre.
+        # This is to use as training data for recommendation of movies.
+        write_data = {}
+
+        for i in range(len(columns)):
+            column = columns[i]
+            write_data[column] = []
+
+        # Filter the data based on the genre of the picked movie
+        for i, row in df_data.iterrows():
+            r_genre = row["Genre"]
+            r_genre = r_genre.replace(" ", "")
+            r_genre_list = r_genre.split(",")
+
+            for j in range(len(r_genre_list)):
+                if r_genre_list[j] in pick_genre_list:
+                    for k in range(len(columns)):
+                        column = columns[k]
+                        write_data[column].append(row[column])
+
+        # 3. Prepare the written data before writing it to a CSV file.
+        df_write_data = pd.DataFrame(write_data)
+        df_write_data = df_write_data.drop_duplicates()
+
+        num_rows = df_write_data.shape[0]
+
+        # Make sure the length of the dataset is divisible by 4
+        # This is required for it to work with a batch size of 4
+        # for training
+        if num_rows % 4 != 0:
+            rem = num_rows % 4
+            df_write_data = df_write_data.drop(df_write_data.tail(rem).index)
+
+        # 4. Write the data to a CSV file.
+        df_write_data.to_csv(CSV_VALIDATION_DATASET, index=False)
+
+        print(f"Written the csv file to {CSV_VALIDATION_DATASET}")
+        print(f"Written the picked movie information to {PICKED_MOVIE_TEXT_FILE}")
+        print("")
 
     table.bind("<Return>", item_selected)
     y_scroll_bar.config(command=table.yview)
