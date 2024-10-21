@@ -57,16 +57,16 @@ def main():
         columns[9],
     )
 
-    column_width = 160
+    column_width = 100
     table.column("#0", width=0, stretch=NO)
-    table.column(columns[0], anchor=CENTER, width=100)
+    table.column(columns[0], anchor=CENTER, width=column_width)
     table.column(columns[1], anchor=CENTER, width=325)
-    table.column(columns[2], anchor=CENTER, width=100)
-    table.column(columns[4], anchor=CENTER, width=100)
+    table.column(columns[2], anchor=CENTER, width=column_width)
+    table.column(columns[4], anchor=CENTER, width=column_width)
     table.column(columns[5], anchor=CENTER, width=220)
-    table.column(columns[6], anchor=CENTER, width=100)
+    table.column(columns[6], anchor=CENTER, width=column_width)
     table.column(columns[7], anchor=CENTER, width=325)
-    table.column(columns[9], anchor=CENTER, width=column_width)
+    table.column(columns[9], anchor=CENTER, width=160)
 
     table.heading("#0", text="", anchor=CENTER)
     table.heading(columns[0], text="Movie ID", anchor=CENTER)
