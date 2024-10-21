@@ -5,7 +5,6 @@ movie the user picks via a GUI interface
 
 import tkinter as tk
 from tkinter import ttk
-from tkinter import Frame, Scrollbar
 from tkinter.constants import CENTER, RIGHT, Y, NO, LEFT, BOTH, BOTTOM, X
 
 from config import CSV_DATASET, CSV_VALIDATION_DATASET
@@ -25,17 +24,17 @@ def main():
     root.geometry(
         f"{WINDOW_WIDTH}x{WINDOW_HEIGHT}+{WINDOW_X_POS}+{WINDOW_Y_POS}"
     )
-    frame = Frame(root)
+    frame = tk.Frame(root)
     w = tk.Label(
         root, text="Pick your favorite movie. Press enter to choose the movie."
     )
     w.pack()
     frame.pack()
 
-    y_scroll_bar = Scrollbar(frame)
+    y_scroll_bar = tk.Scrollbar(frame)
     y_scroll_bar.pack(side=RIGHT, fill=Y)
 
-    x_scroll_bar = Scrollbar(frame, orient="horizontal")
+    x_scroll_bar = tk.Scrollbar(frame, orient="horizontal")
     x_scroll_bar.pack(side=BOTTOM, fill=X)
 
     table = ttk.Treeview(
@@ -166,7 +165,17 @@ def main():
         )
         print("")
 
+    def item_overview(event):
+        # 1. Retrieve the information of the picked movie
+        # Pick a movie
+        selected_index = table.focus()
+        selected_item = table.item(selected_index)
+        item_values = selected_item["values"]
+        view_overview = item_values[6]
+        print(f"Overview: {view_overview}")
+
     table.bind("<Return>", item_selected)
+    table.bind("<Control-Button>", item_overview)
     y_scroll_bar.config(command=table.yview)
     x_scroll_bar.config(command=table.xview)
     table.pack(side=LEFT, fill=BOTH)
