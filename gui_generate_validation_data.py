@@ -53,6 +53,7 @@ def main():
         columns[4],
         columns[5],
         columns[6],
+        columns[7],
         columns[9],
     )
 
@@ -62,8 +63,9 @@ def main():
     table.column(columns[1], anchor=CENTER, width=325)
     table.column(columns[2], anchor=CENTER, width=100)
     table.column(columns[4], anchor=CENTER, width=100)
-    table.column(columns[5], anchor=CENTER, width=column_width)
+    table.column(columns[5], anchor=CENTER, width=220)
     table.column(columns[6], anchor=CENTER, width=100)
+    table.column(columns[7], anchor=CENTER, width=325)
     table.column(columns[9], anchor=CENTER, width=column_width)
 
     table.heading("#0", text="", anchor=CENTER)
@@ -73,6 +75,7 @@ def main():
     table.heading(columns[4], text="Runtime", anchor=CENTER)
     table.heading(columns[5], text="Genre", anchor=CENTER)
     table.heading(columns[6], text="IMDB Rating", anchor=CENTER)
+    table.heading(columns[7], text="Overview", anchor=CENTER)
     table.heading(columns[9], text="Director", anchor=CENTER)
 
     for i in range(len(df_data)):
@@ -82,6 +85,7 @@ def main():
         runtime = df_data.iloc[i]["Runtime"]
         genre = df_data.iloc[i]["Genre"]
         imdb_rating = df_data.iloc[i]["IMDB_Rating"]
+        overview = df_data.iloc[i]["Overview"]
         director = df_data.iloc[i]["Director"]
         r_values = (
             movie_id,
@@ -90,6 +94,7 @@ def main():
             runtime,
             genre,
             imdb_rating,
+            overview,
             director,
         )
         table.insert(parent="", index="end", iid=i, text="", values=r_values)
