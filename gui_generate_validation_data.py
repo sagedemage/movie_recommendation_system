@@ -173,6 +173,7 @@ def main():
         item_values = selected_item["values"]
         view_overview = item_values[6]
         print(f"Overview: {view_overview}")
+        print("")
 
     table.bind("<Return>", item_selected)
     table.bind("<Control-Button>", item_overview)
