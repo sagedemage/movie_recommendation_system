@@ -113,12 +113,11 @@ def main():
         # Log the information of the movie to remember what movie the user chose
         file = open(PICKED_MOVIE_TEXT_FILE, "w", encoding="utf-8")
 
-        movie_id = item_values[0]
-        row = df_data.iloc[movie_id]
-        columns = df_data.columns
+        pick_movie_id = item_values[0]
+        pick_row = df_data.iloc[pick_movie_id]
         index = 0
         for col in columns:
-            buf = f"{col}: {row[col]}\n"
+            buf = f"{col}: {pick_row[col]}\n"
             file.write(buf)
             index += 1
         file.write("\n")
