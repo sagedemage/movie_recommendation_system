@@ -172,6 +172,7 @@ def main():
         selected_item = table.item(selected_index)
         item_values = selected_item["values"]
 
+        # 2. Print the overview of the selected movie
         if len(item_values) == 8:
             view_overview = item_values[6]
             print(f"Overview: {view_overview}")
