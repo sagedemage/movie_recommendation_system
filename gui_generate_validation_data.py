@@ -98,7 +98,7 @@ def main():
         )
         table.insert(parent="", index="end", iid=i, text="", values=r_values)
 
-    def item_selected(event):
+    def item_selected(event): # pylint: disable=unused-argument
         # 1. Retrieve the information of the picked movie
         # Pick a movie
         selected_index = table.focus()
@@ -165,7 +165,7 @@ def main():
         )
         print("")
 
-    def item_overview(event):
+    def item_overview(event): # pylint: disable=unused-argument
         # 1. Retrieve the information of the picked movie
         # Pick a movie
         selected_index = table.focus()
