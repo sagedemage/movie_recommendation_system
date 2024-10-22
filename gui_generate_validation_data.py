@@ -20,7 +20,7 @@ PICKED_MOVIE_TEXT_FILE = "validation_data/picked_movie.txt"
 def main():
     df_data = pd.read_csv(CSV_DATASET)
     root = tk.Tk()
-    root.title("Test window")
+    root.title("Generate Validation Data")
     root.geometry(
         f"{WINDOW_WIDTH}x{WINDOW_HEIGHT}+{WINDOW_X_POS}+{WINDOW_Y_POS}"
     )
