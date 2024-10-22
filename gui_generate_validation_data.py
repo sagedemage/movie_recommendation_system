@@ -171,9 +171,11 @@ def main():
         selected_index = table.focus()
         selected_item = table.item(selected_index)
         item_values = selected_item["values"]
-        view_overview = item_values[6]
-        print(f"Overview: {view_overview}")
-        print("")
+
+        if len(item_values) == 8:
+            view_overview = item_values[6]
+            print(f"Overview: {view_overview}")
+            print("")
 
     table.bind("<Return>", item_selected)
     table.bind("<Control-Button>", item_overview)
