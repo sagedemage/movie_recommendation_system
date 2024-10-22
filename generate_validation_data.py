@@ -5,26 +5,27 @@ import sys
 
 from config import CSV_DATASET, CSV_VALIDATION_DATASET
 
+PICKED_MOVIE_TEXT_FILE = "validation_data/picked_movie.txt"
+
 
 def main():
+    # 1. Retrieve the information of the picked movie
     if len(sys.argv) < 2:
         print("Missing the index of the row!")
         exit()
     args = sys.argv
-    # Index of the row
-    row_index = int(args[1])
-
-    write_data = {}
 
     df_data = pd.read_csv(CSV_DATASET)
 
     # Pick a movie
+    row_index = int(args[1])
     pick_row = df_data.iloc[row_index]
     pick_genre = pick_row["Genre"]
     pick_genre = pick_genre.replace(" ", "")
     pick_genre_list = pick_genre.split(",")
 
-    file = open("validation_data/picked_movie.txt", "w", encoding="utf-8")
+    # Log the information of the movie to remember what movie the user chose
+    file = open(PICKED_MOVIE_TEXT_FILE, "w", encoding="utf-8")
     for col in df_data.columns:
         buf = f"{col}: {pick_row[col]}\n"
         file.write(buf)
@@ -36,12 +37,16 @@ def main():
     print(pick_genre_list)
     print("")
 
+    # 2. Add movies where one of their genres is in the picked movie's genre.
+    # This is to use as training data for recommendation of movies.
+    write_data = {}
     columns = df_data.columns
 
     for i in range(len(columns)):
         column = columns[i]
         write_data[column] = []
 
+    # Filter the data based on the genre of the picked movie
     for i, row in df_data.iterrows():
         r_genre = row["Genre"]
         r_genre = r_genre.replace(" ", "")
@@ -53,9 +58,8 @@ def main():
                     column = columns[k]
                     write_data[column].append(row[column])
 
+    # 3. Prepare the written data before writing it to a CSV file.
     df_write_data = pd.DataFrame(write_data)
-
-    # Remove duplicate data
     df_write_data = df_write_data.drop_duplicates()
 
     num_rows = df_write_data.shape[0]
@@ -66,11 +70,12 @@ def main():
     if num_rows % 4 != 0:
         rem = num_rows % 4
         df_write_data = df_write_data.drop(df_write_data.tail(rem).index)
-        print(f"Number of rows: {num_rows}")
-        print(f"Remainder: {rem}")
 
-    # Write the data to a CSV file
+    # 4. Write the data to a CSV file.
     df_write_data.to_csv(CSV_VALIDATION_DATASET, index=False)
+
+    print(f"Written the csv file to {CSV_VALIDATION_DATASET}")
+    print(f"Written the picked movie information to {PICKED_MOVIE_TEXT_FILE}")
 
 
 if __name__ == "__main__":
