@@ -109,6 +109,8 @@ def main():
     writer = SummaryWriter(LOG_DATA_DIR + f"movie_trainer_{timestamp}")
     epoch_number = 0
     best_vloss = 1_000_000.0
+    best_accuracy = 0
+    best_loss = 1_000_000.0
 
     for _ in range(EPOCHS):
         print(f"EPOCH {epoch_number + 1}:")
@@ -157,7 +159,7 @@ def main():
 
         avg_vloss = running_vloss / (len(validation_loader))
         accuracy = 100 * (correct / size)
-        print(f"Accuracy: {accuracy}")
+        print(f"Accuracy: {accuracy}%")
         print(f"LOSS train {avg_loss} valid {avg_vloss}")
 
         # Log the running loss average per batch
@@ -178,8 +180,17 @@ def main():
             )
             torch.save(model.state_dict(), model_path)
 
+        if accuracy > best_accuracy:
+            best_accuracy = accuracy
+
+        if avg_loss < best_loss:
+            best_loss = avg_loss
+
         epoch_number += 1
 
+    print("")
+    print(f"Best accuracy: {best_accuracy}%")
+    print(f"Best LOSS train {best_loss} valid {best_vloss}")
 
 if __name__ == "__main__":
     main()
