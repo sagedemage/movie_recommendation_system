@@ -29,7 +29,7 @@ def main():
     data_set = MovieDataset(CSV_DATASET)
     data_loader = DataLoader(data_set, batch_size=BATCH_SIZE, shuffle=True)
 
-    data_movie_ids, data_labels = next(iter(data_loader))
+    data_movie_ids, _ = next(iter(data_loader))
 
     # Load a saved version of the model
     saved_model = MovieRecommendation().to(device)
