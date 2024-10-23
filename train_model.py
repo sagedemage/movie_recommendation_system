@@ -19,8 +19,8 @@ LOG_DATA_DIR = "runs/"
 
 # batch_size - how many samples per batch to load
 BATCH_SIZE = 4
-EPOCHS = 160
-LEARNING_RATE = 0.0000005
+EPOCHS = 190
+LEARNING_RATE = 0.00000005
 
 
 def train_one_epoch(
@@ -60,14 +60,15 @@ def train_one_epoch(
 
         # Gather data and report
         running_loss += loss.item()
-        if i % 100 == 0:
-            last_loss = running_loss / 100  # loss per batch
+
+        if i % 10 == 0:
+            last_loss = running_loss / 10  # loss per batch
             print(f"batch {i + 1} loss: {last_loss}")
             tb_x = epoch_index * len(training_loader) + i + 1
             tb_writer.add_scalar("Loss/train", last_loss, tb_x)
             running_loss = 0.0
 
-        return last_loss
+    return last_loss
 
 
 def main():
