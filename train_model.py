@@ -60,8 +60,8 @@ def train_one_epoch(
 
         # Gather data and report
         running_loss += loss.item()
-        if i % 1000 == 999:
-            last_loss = running_loss / 1000  # loss per batch
+        if i % 100 == 0:
+            last_loss = running_loss / 100  # loss per batch
             print(f"batch {i + 1} loss: {last_loss}")
             tb_x = epoch_index * len(training_loader) + i + 1
             tb_writer.add_scalar("Loss/train", last_loss, tb_x)
@@ -113,6 +113,7 @@ def main():
     for _ in range(EPOCHS):
         print(f"EPOCH {epoch_number + 1}:")
 
+        # 1. Train the Model
         # Make sure gradient tracking is on, and do a pass over the data
         model.train(True)
         avg_loss = train_one_epoch(
@@ -127,8 +128,11 @@ def main():
 
         running_vloss = 0.0
 
+        # 2. Evaluate the Model
         # Set model to evaluation mode
         model.eval()
+        size = len(validation_set)
+        correct = 0
 
         # Disable gradient computation and reduce memory consumption
         with torch.no_grad():
@@ -144,8 +148,11 @@ def main():
                 voutputs = model(vmovie_ids)
                 vloss = loss_fn(voutputs, vlabels)
                 running_vloss += vloss
+                correct += (voutputs.argmax(0) == vlabels).type(torch.float).sum().item()
 
         avg_vloss = running_vloss / (len(validation_loader))
+        accuracy = 100 * (correct / size)
+        print(f"Accuracy: {accuracy}")
         print(f"LOSS train {avg_loss} valid {avg_vloss}")
 
         # Log the running loss average per batch
