@@ -160,7 +160,7 @@ def main():
         avg_vloss = running_vloss / (len(validation_loader))
         accuracy = 100 * (correct / size)
         print(f"Accuracy: {accuracy}%")
-        print(f"LOSS train {avg_loss} valid {avg_vloss}")
+        print(f"Training loss: {avg_loss}, Validation loss: {avg_vloss}")
 
         # Log the running loss average per batch
         # for both training and validation
@@ -189,8 +189,8 @@ def main():
         epoch_number += 1
 
     print("")
-    print(f"Best accuracy: {best_accuracy}%")
-    print(f"Best LOSS train {best_loss} valid {best_vloss}")
+    print(f"Best Accuracy: {best_accuracy}%")
+    print(f"Best Training loss: {best_loss}, Validation loss: {best_vloss}")
 
 if __name__ == "__main__":
     main()
