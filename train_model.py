@@ -148,7 +148,12 @@ def main():
                 voutputs = model(vmovie_ids)
                 vloss = loss_fn(voutputs, vlabels)
                 running_vloss += vloss
-                correct += (voutputs.argmax(0) == vlabels).type(torch.float).sum().item()
+                correct += (
+                    (voutputs.argmax(0) == vlabels)
+                    .type(torch.float)
+                    .sum()
+                    .item()
+                )
 
         avg_vloss = running_vloss / (len(validation_loader))
         accuracy = 100 * (correct / size)
