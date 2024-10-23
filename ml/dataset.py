@@ -19,11 +19,13 @@ class MovieDataset(Dataset):
         row = self.df_data.iloc[idx]
 
         movie_id = row["Movie_ID"]
+        label = row["Label"]
 
         if self.target_transform:
             movie_id = self.target_transform(movie_id)
+            label = self.target_transform(label)
 
-        return movie_id
+        return movie_id, label
 
     def get_item_by_movie_id(self, movie_id: int):
         rows = self.df_data.loc[self.df_data["Movie_ID"] == movie_id]

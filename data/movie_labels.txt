@@ -1,0 +1,103 @@
+Movie Labels by Genre
+---------------------
+0. Action
+1. Action Epic
+2. Adult Animation
+3. Adventure
+4. Adventure Epic
+5. Animal Adventure
+6. Animation
+7. Anime
+8. Artificial Intelligence
+9. Biography
+10. Boxing
+11. Buddy Comedy
+12. Caper
+13. Car Action
+14. Classical Musical
+15. Comedy
+16. Coming-of-Age
+17. Computer Animation
+18. Conspiracy Thriller
+19. Cop Drama
+20. Costume Drama
+21. Crime
+22. Cyberpunk
+23. Dark Comedy
+24. Dark Fantasy
+25. Dark Romance
+26. Desert Adventure
+27. Docudrama
+28. Drama
+29. Drug Crime
+30. Dystopian Sci-Fi
+31. Epic
+32. Fairy Tale
+33. Fantasy
+34. Fantasy Epic
+35. Family
+36. Farce
+37. Feel-Good Romance
+38. Film-Noir
+39. Financial Drama
+40. Gangster
+41. Globetrotting Adventure
+42. Hand-Drawn Animation
+43. Hard-boiled Detective
+44. Heist
+45. High-Concept Comedy
+46. History
+47. Historical Epic
+48. Holiday
+49. Horror
+50. Jukebox Musical
+51. Jungle Adventure
+52. Legal Drama
+53. Medical Drama
+54. Monster Horror
+55. Music
+56. Musical
+57. Mystery
+58. One-Person Army Action
+59. Quest
+60. Quirky Comedy
+61. Parody
+62. Period Drama
+63. Police Procedural
+64. Political Drama
+65. Political Thriller
+66. Prison Drama
+67. Psychological Drama
+68. Psychological Thriller
+69. Romance
+70. Romantic Comedy
+71. Road Trip
+72. Samurai
+73. Satire
+74. Sea Adventure
+75. Sci-Fi
+76. Sci-Fi Epic
+77. Screwball Comedy
+78. Serial Killer
+79. Showbiz Drama
+80. Slapstick
+81. Space Sci-Fi
+82. Spaghetti Western
+83. Sport
+84. Spy
+85. Steampunk
+86. Superhero
+87. Supernatural Fantasy
+88. Suspense Mystery
+89. Sword & Sandal
+90. Sword & Sorcery
+91. Thriller
+92. Time Travel
+93. Tragedy
+94. True Crime
+95. War
+96. War Epic
+97. Western
+98. Western Epic
+99. Whodunnit
+

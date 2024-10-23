@@ -29,17 +29,17 @@ def main():
     data_set = MovieDataset(CSV_DATASET)
     data_loader = DataLoader(data_set, batch_size=BATCH_SIZE, shuffle=True)
 
-    data_movie_id = next(iter(data_loader))
+    data_movie_ids, _ = next(iter(data_loader))
 
     # Load a saved version of the model
     saved_model = MovieRecommendation().to(device)
     saved_model.load_state_dict(torch.load(model_path, weights_only=True))
 
     # Perform a transform on the data for it to be usable for the model
-    data_movie_id = data_movie_id.to(device)
-    data_movie_id = data_movie_id.type(torch.float32)
+    data_movie_ids = data_movie_ids.to(device)
+    data_movie_ids = data_movie_ids.type(torch.float32)
 
-    logits = saved_model(data_movie_id)
+    logits = saved_model(data_movie_ids)
     pred_probab = nn.Softplus()(logits)
     y_pred = pred_probab.argmax(0)
     pred_tensor = pred_probab[y_pred]

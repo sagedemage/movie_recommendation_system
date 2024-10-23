@@ -19,8 +19,8 @@ LOG_DATA_DIR = "runs/"
 
 # batch_size - how many samples per batch to load
 BATCH_SIZE = 4
-EPOCHS = 130
-LEARNING_RATE = 0.000005
+EPOCHS = 160
+LEARNING_RATE = 0.0000005
 
 
 def train_one_epoch(
@@ -36,20 +36,23 @@ def train_one_epoch(
     last_loss = 0.0
 
     for i, data in enumerate(training_loader):
-        movie_id = data
+        movie_ids, labels = data
 
         # Zero the gradients for every batch!
         optimizer.zero_grad()
 
         # Perform a transform on the data for it to be usable for the model
-        movie_id = movie_id.to(device)
-        movie_id = movie_id.type(torch.float32)
+        movie_ids = movie_ids.to(device)
+        movie_ids = movie_ids.type(torch.float32)
+
+        labels = labels.to(device)
+        labels = labels.type(torch.float32)
 
         # Make predictions for this batch
-        outputs = model(movie_id)
+        outputs = model(movie_ids)
 
         # Compute the loss and its gradients
-        loss = loss_fn(outputs, movie_id)
+        loss = loss_fn(outputs, labels)
         loss.backward()
 
         # Adjust learning weights
@@ -130,13 +133,16 @@ def main():
         # Disable gradient computation and reduce memory consumption
         with torch.no_grad():
             for _, vdata in enumerate(validation_loader):
-                vmovie_id = vdata
+                vmovie_ids, vlabels = vdata
 
-                vmovie_id = vmovie_id.to(device)
-                vmovie_id = vmovie_id.type(torch.float32)
+                vmovie_ids = vmovie_ids.to(device)
+                vmovie_ids = vmovie_ids.type(torch.float32)
 
-                voutputs = model(vmovie_id)
-                vloss = loss_fn(voutputs, vmovie_id)
+                vlabels = vlabels.to(device)
+                vlabels = vlabels.type(torch.float32)
+
+                voutputs = model(vmovie_ids)
+                vloss = loss_fn(voutputs, vlabels)
                 running_vloss += vloss
 
         avg_vloss = running_vloss / (len(validation_loader))
