@@ -105,8 +105,9 @@ def main():
     # Loss Function
     loss_fn = torch.nn.L1Loss()
 
-    # Optimizer
-    # 1. Increase the momentum from zero to improve the convergence
+    # Stochastic gradient descent optimization algorithm
+    # 1. Increase the momentum from zero to accelerate convergence.
+    # 2. Enable Nesterov Momentum to improve the convergence
     # speed of the stochastic gradient descent.
     optimizer = torch.optim.SGD(
         model.parameters(),
