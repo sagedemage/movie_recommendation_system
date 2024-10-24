@@ -20,7 +20,11 @@ LOG_DATA_DIR = "runs/"
 # batch_size - how many samples per batch to load
 BATCH_SIZE = 4
 EPOCHS = 190
-LEARNING_RATE = 0.00000005
+
+# Optimization
+LEARNING_RATE = 0.00000001
+MOMENTUM = 0.9
+WEIGHT_DECAY = 0.001
 
 
 def train_one_epoch(
@@ -103,7 +107,15 @@ def main():
     loss_fn = torch.nn.L1Loss()
 
     # Optimizer
-    optimizer = torch.optim.SGD(model.parameters(), lr=LEARNING_RATE)
+    # 1. Increase the momentum from zero to improve the convergence
+    # speed of the stochastic gradient descent.
+    # 2. Increase the weight decay from zero to prevent overfitting.
+    optimizer = torch.optim.SGD(
+        model.parameters(),
+        lr=LEARNING_RATE,
+        #momentum=MOMENTUM,
+        #weight_decay=WEIGHT_DECAY,
+    )
 
     # Training Loop
     timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
