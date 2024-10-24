@@ -24,7 +24,6 @@ EPOCHS = 190
 # Optimization
 LEARNING_RATE = 0.00000001
 MOMENTUM = 0.9
-WEIGHT_DECAY = 0.001
 
 
 def train_one_epoch(
@@ -109,13 +108,11 @@ def main():
     # Optimizer
     # 1. Increase the momentum from zero to improve the convergence
     # speed of the stochastic gradient descent.
-    # 2. Increase the weight decay from zero to prevent overfitting.
     optimizer = torch.optim.SGD(
         model.parameters(),
         lr=LEARNING_RATE,
         momentum=MOMENTUM,
         nesterov=True,
-        #weight_decay=WEIGHT_DECAY,
     )
 
     # Training Loop
