@@ -134,7 +134,7 @@ def main():
         # 2. Evaluate the Model
         # Set model to evaluation mode
         model.eval()
-        size = len(validation_set)
+        size = len(validation_loader.dataset)
         correct = 0
 
         # Disable gradient computation and reduce memory consumption
