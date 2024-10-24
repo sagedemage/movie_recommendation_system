@@ -109,7 +109,7 @@ def main():
     # Stochastic gradient descent optimization algorithm
     # 1. Increase the momentum from zero to accelerate convergence.
     # 2. Enable Nesterov Momentum to improve the convergence
-    # speed of the stochastic gradient descent.
+    # speed of stochastic gradient descent.
     # 3. Increase the weight decay from zero to prevent overfitting.
     optimizer = torch.optim.SGD(
         model.parameters(),
