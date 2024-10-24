@@ -135,6 +135,7 @@ def main():
         # Set model to evaluation mode
         model.eval()
         size = len(validation_loader.dataset)
+        num_batches = len(validation_loader)
         correct = 0
 
         # Disable gradient computation and reduce memory consumption
@@ -158,7 +159,7 @@ def main():
                     .item()
                 )
 
-        avg_vloss = running_vloss / (len(validation_loader))
+        avg_vloss = running_vloss / num_batches
         accuracy = 100 * (correct / size)
         print(f"Accuracy: {accuracy}%")
         print(f"Training loss: {avg_loss}, Validation loss: {avg_vloss}")
