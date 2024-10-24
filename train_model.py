@@ -129,14 +129,13 @@ def main():
             loss_fn,
         )
 
-        running_vloss = 0.0
-
         # 2. Evaluate the Model
         # Set model to evaluation mode
         model.eval()
         size = len(validation_loader.dataset)
         num_batches = len(validation_loader)
         correct = 0
+        running_vloss = 0.0
 
         # Disable gradient computation and reduce memory consumption
         with torch.no_grad():
