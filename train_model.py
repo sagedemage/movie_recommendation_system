@@ -181,6 +181,12 @@ def main():
             {"Training": avg_loss, "Validation": avg_vloss},
             epoch_number + 1,
         )
+        # Log the accuracy per batch
+        writer.add_scalars(
+            "Accuracy",
+            {"Accuracy": accuracy},
+            epoch_number + 1,
+        )
         writer.flush()
 
         # Track the best performance, and save the model's state
