@@ -113,7 +113,8 @@ def main():
     optimizer = torch.optim.SGD(
         model.parameters(),
         lr=LEARNING_RATE,
-        #momentum=MOMENTUM,
+        momentum=MOMENTUM,
+        nesterov=True,
         #weight_decay=WEIGHT_DECAY,
     )
 
