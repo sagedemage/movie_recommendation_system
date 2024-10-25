@@ -107,10 +107,15 @@ def main():
     loss_fn = torch.nn.L1Loss()
 
     # Stochastic gradient descent optimization algorithm
-    # 1. Increase the momentum from zero to accelerate convergence.
+    # 1. Increase the momentum from zero to:
+    #   1. accelerate convergence
+    #   2. smooth out the oscillations
     # 2. Enable Nesterov Momentum to improve the convergence
     # speed of stochastic gradient descent.
-    # 3. Increase the weight decay from zero to prevent overfitting.
+    # 3. Increase the weight decay from zero to:
+    #   1. prevent overfitting
+    #   2. keep the weights small
+    #   3. avoid exploding the gradient
     optimizer = torch.optim.SGD(
         model.parameters(),
         lr=LEARNING_RATE,
