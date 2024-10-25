@@ -5,7 +5,7 @@ import sys
 import asyncio
 
 
-async def accuracy(
+async def measure_accuracy(
     process_num: int, model_path: str, genre_list: list, correct_values: list
 ):
     correct = 0
@@ -54,16 +54,16 @@ async def main():
     correct_values = []
 
     await asyncio.gather(
-        accuracy(1, model_path, genre_list, correct_values),
-        accuracy(2, model_path, genre_list, correct_values),
-        accuracy(3, model_path, genre_list, correct_values),
-        accuracy(4, model_path, genre_list, correct_values),
-        accuracy(5, model_path, genre_list, correct_values),
-        accuracy(6, model_path, genre_list, correct_values),
-        accuracy(7, model_path, genre_list, correct_values),
-        accuracy(8, model_path, genre_list, correct_values),
-        accuracy(9, model_path, genre_list, correct_values),
-        accuracy(10, model_path, genre_list, correct_values),
+        measure_accuracy(1, model_path, genre_list, correct_values),
+        measure_accuracy(2, model_path, genre_list, correct_values),
+        measure_accuracy(3, model_path, genre_list, correct_values),
+        measure_accuracy(4, model_path, genre_list, correct_values),
+        measure_accuracy(5, model_path, genre_list, correct_values),
+        measure_accuracy(6, model_path, genre_list, correct_values),
+        measure_accuracy(7, model_path, genre_list, correct_values),
+        measure_accuracy(8, model_path, genre_list, correct_values),
+        measure_accuracy(9, model_path, genre_list, correct_values),
+        measure_accuracy(10, model_path, genre_list, correct_values),
     )
 
     acc_per = sum(correct_values) / 10
