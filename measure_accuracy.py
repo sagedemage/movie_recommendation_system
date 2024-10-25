@@ -5,9 +5,7 @@ import sys
 import asyncio
 
 
-async def measure_accuracy(
-    process_num: int, model_path: str, genre_list: list, correct_values: list
-):
+async def measure_accuracy(process_num: int, model_path: str, genre_list: list):
     correct = 0
 
     for _ in range(100):
@@ -28,8 +26,8 @@ async def measure_accuracy(
                 correct += 1
                 break
 
-    correct_values.append(correct)
     print(f"Process {process_num} done")
+    return correct
 
 
 async def main():
@@ -51,19 +49,17 @@ async def main():
     file.close()
     print(genre_list)
 
-    correct_values = []
-
-    await asyncio.gather(
-        measure_accuracy(1, model_path, genre_list, correct_values),
-        measure_accuracy(2, model_path, genre_list, correct_values),
-        measure_accuracy(3, model_path, genre_list, correct_values),
-        measure_accuracy(4, model_path, genre_list, correct_values),
-        measure_accuracy(5, model_path, genre_list, correct_values),
-        measure_accuracy(6, model_path, genre_list, correct_values),
-        measure_accuracy(7, model_path, genre_list, correct_values),
-        measure_accuracy(8, model_path, genre_list, correct_values),
-        measure_accuracy(9, model_path, genre_list, correct_values),
-        measure_accuracy(10, model_path, genre_list, correct_values),
+    correct_values = await asyncio.gather(
+        measure_accuracy(1, model_path, genre_list),
+        measure_accuracy(2, model_path, genre_list),
+        measure_accuracy(3, model_path, genre_list),
+        measure_accuracy(4, model_path, genre_list),
+        measure_accuracy(5, model_path, genre_list),
+        measure_accuracy(6, model_path, genre_list),
+        measure_accuracy(7, model_path, genre_list),
+        measure_accuracy(8, model_path, genre_list),
+        measure_accuracy(9, model_path, genre_list),
+        measure_accuracy(10, model_path, genre_list),
     )
 
     acc_per = sum(correct_values) / 10
