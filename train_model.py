@@ -151,7 +151,7 @@ def main():
         # 2. Evaluate the Model
         # Set model to evaluation mode
         model.eval()
-        size = len(validation_loader.dataset)
+        size = len(validation_set)
         num_batches = len(validation_loader)
         correct = 0
         running_vloss = 0.0
