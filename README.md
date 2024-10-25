@@ -61,12 +61,12 @@ with his alter-ego: the Joker.
 - Gross: 335451311.0
 
 ### 1. Result
-Here is the result after running the movie recommendation program 100 times:
-- Accuracy of the recommendations: 79%
+Here is the result after running the movie recommendation program 1000 times:
+- Accuracy of the recommendations: 81.6%
 
-**Note**: The `measure_accuracy.py` script runs the program 100 times for me.
+**Note**: The `measure_accuracy.py` script runs the program 1000 times for me.
 
-The accuracy of the model is 79%. There is certainly more work that has to be
+The accuracy of the model is 81.6%. There is certainly more work that has to be
 done to get it to a 90% accuracy. An accuracy above 75% is pretty good for a demo
 project.
 
