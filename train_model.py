@@ -116,7 +116,7 @@ def main():
         lr=LEARNING_RATE,
         momentum=MOMENTUM,
         nesterov=True,
-        weight_decay=WEIGHT_DECAY
+        weight_decay=WEIGHT_DECAY,
     )
 
     # Training Loop
