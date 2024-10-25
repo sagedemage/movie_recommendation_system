@@ -2,27 +2,12 @@
 
 import os
 import sys
+import asyncio
 
 
-def main():
-    if len(sys.argv) < 2:
-        print("Missing the model file path!")
-        exit()
-    args = sys.argv
-    # Use trained model
-    model_path = args[1]
-
-    file = open("validation_data/picked_movie.txt", "r", encoding="utf-8")
-    genre_list = []
-    for line in file:
-        if line[0:6] == "Genre:":
-            line = line.replace("Genre:", "")
-            line = line.replace(" ", "")
-            line = line.replace("\n", "")
-            genre_list = line.split(",")
-    file.close()
-    print(genre_list)
-
+async def accuracy(
+    process_num: int, model_path: str, genre_list: list, correct_values: list
+):
     correct = 0
 
     for _ in range(100):
@@ -43,9 +28,47 @@ def main():
                 correct += 1
                 break
 
-    acc_per = correct
+    correct_values.append(correct)
+    print(f"Process {process_num} done")
+
+
+async def main():
+    if len(sys.argv) < 2:
+        print("Missing the model file path!")
+        exit()
+    args = sys.argv
+    # Use trained model
+    model_path = args[1]
+
+    file = open("validation_data/picked_movie.txt", "r", encoding="utf-8")
+    genre_list = []
+    for line in file:
+        if line[0:6] == "Genre:":
+            line = line.replace("Genre:", "")
+            line = line.replace(" ", "")
+            line = line.replace("\n", "")
+            genre_list = line.split(",")
+    file.close()
+    print(genre_list)
+
+    correct_values = []
+
+    await asyncio.gather(
+        accuracy(1, model_path, genre_list, correct_values),
+        accuracy(2, model_path, genre_list, correct_values),
+        accuracy(3, model_path, genre_list, correct_values),
+        accuracy(4, model_path, genre_list, correct_values),
+        accuracy(5, model_path, genre_list, correct_values),
+        accuracy(6, model_path, genre_list, correct_values),
+        accuracy(7, model_path, genre_list, correct_values),
+        accuracy(8, model_path, genre_list, correct_values),
+        accuracy(9, model_path, genre_list, correct_values),
+        accuracy(10, model_path, genre_list, correct_values),
+    )
+
+    acc_per = sum(correct_values) / 10
     print(f"Accuracy of {acc_per}%")
 
 
 if __name__ == "__main__":
-    main()
+    asyncio.run(main())
