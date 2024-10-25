@@ -216,7 +216,9 @@ def main():
 
     print("")
     print(f"Best Accuracy: {best_accuracy}%")
-    print(f"Best Training loss: {best_loss}, Best Validation loss: {best_vloss}")
+    print(
+        f"Best Training loss: {best_loss}, Best Validation loss: {best_vloss}"
+    )
 
 
 if __name__ == "__main__":
