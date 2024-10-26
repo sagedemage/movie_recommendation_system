@@ -63,7 +63,7 @@ async def main():
         measure_accuracy(10, model_path, genre_list),
     )
 
-    accuracy = sum(accuracy_values) / 10
+    accuracy = int(sum(accuracy_values) / 10)
     print(f"Accuracy of {accuracy}%")
 
 
