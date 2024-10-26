@@ -61,12 +61,12 @@ with his alter-ego: the Joker.
 - Gross: 335451311.0
 
 ### 1. Result
-Here is the result after running the movie recommendation program 100 times:
-- Accuracy of the recommendations: 84%
+Here is the result after running the movie recommendation program 1000 times:
+- Accuracy of the recommendations: 80.9%
 
-**Note**: The `measure_accuracy.py` script runs the program 100 times for me.
+**Note**: The `measure_accuracy.py` script runs the program 1000 times for me.
 
-The accuracy of the model is 84%. There is certainly more work that has to be
+The accuracy of the model is 80.9%. There is certainly more work that has to be
 done to get it to a 90% accuracy. An accuracy above 75% is pretty good for a demo
 project.
 
@@ -78,6 +78,7 @@ project.
   - [Tensors](https://pytorch.org/tutorials/beginner/basics/tensorqs_tutorial.html)
   - [Datasets & DataLoaders](https://pytorch.org/tutorials/beginner/basics/data_tutorial.html)
   - [Build the Neural Network](https://pytorch.org/tutorials/beginner/basics/buildmodel_tutorial.html)
+  - [Optimizing Model Parameters](https://pytorch.org/tutorials/beginner/basics/optimization_tutorial.html)
 - Introduction to PyTorch on YouTube
   - [Introduction to PyTorch - YouTube Series](https://pytorch.org/tutorials/beginner/introyt.html)
   - [Introduction to PyTorch](https://pytorch.org/tutorials/beginner/introyt/introyt1_tutorial.html)
@@ -87,3 +88,5 @@ project.
   - [PyTorch TensorBoard Support](https://pytorch.org/tutorials/beginner/introyt/tensorboardyt_tutorial.html)
   - [Training with PyTorch](https://pytorch.org/tutorials/beginner/introyt/trainingyt.html)
   - [Model Understanding with Captum](https://pytorch.org/tutorials/beginner/introyt/captumyt.html)
+- [Nesterov Momentum Explained with examples in TensorFlow and PyTorch - Medium](https://medium.com/@giorgio.martinez1926/nesterov-momentum-explained-with-examples-in-tensorflow-and-pytorch-4673dbf21998)
+- [Pytorch Change the learning rate based on number of epochs - StackOverflow](https://stackoverflow.com/questions/60050586/pytorch-change-the-learning-rate-based-on-number-of-epochs)

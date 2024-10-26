@@ -19,8 +19,11 @@ LOG_DATA_DIR = "runs/"
 
 # batch_size - how many samples per batch to load
 BATCH_SIZE = 4
-EPOCHS = 160
-LEARNING_RATE = 0.0000005
+EPOCHS = 190
+
+# Optimization
+LEARNING_RATE = 0.00000001
+MOMENTUM = 0.9
 
 
 def train_one_epoch(
@@ -60,14 +63,15 @@ def train_one_epoch(
 
         # Gather data and report
         running_loss += loss.item()
-        if i % 1000 == 999:
-            last_loss = running_loss / 1000  # loss per batch
+
+        if i % 10 == 0:
+            last_loss = running_loss / 10  # loss per batch
             print(f"batch {i + 1} loss: {last_loss}")
             tb_x = epoch_index * len(training_loader) + i + 1
             tb_writer.add_scalar("Loss/train", last_loss, tb_x)
             running_loss = 0.0
 
-        return last_loss
+    return last_loss
 
 
 def main():
@@ -101,18 +105,31 @@ def main():
     # Loss Function
     loss_fn = torch.nn.L1Loss()
 
-    # Optimizer
-    optimizer = torch.optim.SGD(model.parameters(), lr=LEARNING_RATE)
+    # Stochastic gradient descent optimization algorithm
+    # 1. Increase the momentum from zero to:
+    #   1. accelerate convergence
+    #   2. smooth out the oscillations
+    # 2. Enable Nesterov Momentum to improve the convergence
+    # speed of stochastic gradient descent.
+    optimizer = torch.optim.SGD(
+        model.parameters(),
+        lr=LEARNING_RATE,
+        momentum=MOMENTUM,
+        nesterov=True,
+    )
 
     # Training Loop
     timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
     writer = SummaryWriter(LOG_DATA_DIR + f"movie_trainer_{timestamp}")
     epoch_number = 0
     best_vloss = 1_000_000.0
+    best_accuracy = 0
+    best_loss = 1_000_000.0
 
     for _ in range(EPOCHS):
         print(f"EPOCH {epoch_number + 1}:")
 
+        # 1. Train the Model
         # Make sure gradient tracking is on, and do a pass over the data
         model.train(True)
         avg_loss = train_one_epoch(
@@ -125,10 +142,13 @@ def main():
             loss_fn,
         )
 
-        running_vloss = 0.0
-
+        # 2. Evaluate the Model
         # Set model to evaluation mode
         model.eval()
+        size = len(validation_set)
+        num_batches = len(validation_loader)
+        correct = 0
+        running_vloss = 0.0
 
         # Disable gradient computation and reduce memory consumption
         with torch.no_grad():
@@ -144,15 +164,29 @@ def main():
                 voutputs = model(vmovie_ids)
                 vloss = loss_fn(voutputs, vlabels)
                 running_vloss += vloss
+                correct += (
+                    (voutputs.argmax(0) == vlabels)
+                    .type(torch.float)
+                    .sum()
+                    .item()
+                )
 
-        avg_vloss = running_vloss / (len(validation_loader))
-        print(f"LOSS train {avg_loss} valid {avg_vloss}")
+        avg_vloss = running_vloss / num_batches
+        accuracy = 100 * (correct / size)
+        print(f"Accuracy: {accuracy}%")
+        print(f"Training loss: {avg_loss}, Validation loss: {avg_vloss}")
 
         # Log the running loss average per batch
         # for both training and validation
         writer.add_scalars(
             "Training vs. Validation Loss",
             {"Training": avg_loss, "Validation": avg_vloss},
+            epoch_number + 1,
+        )
+        # Log the accuracy per batch
+        writer.add_scalars(
+            "Accuracy",
+            {"Accuracy": accuracy},
             epoch_number + 1,
         )
         writer.flush()
@@ -166,7 +200,20 @@ def main():
             )
             torch.save(model.state_dict(), model_path)
 
+        if accuracy > best_accuracy:
+            best_accuracy = accuracy
+
+        if avg_loss < best_loss:
+            best_loss = avg_loss
+
         epoch_number += 1
+
+    print("")
+    print(f"Best Accuracy: {best_accuracy}%")
+    print(
+        f"Lowest Training loss: {best_loss}, "
+        f"Lowest Validation loss: {best_vloss}"
+    )
 
 
 if __name__ == "__main__":
