@@ -58,7 +58,6 @@ def main():
     print(f"Genre: {genre}")
     print(f"IMDB Rating: {imdb_rating}")
     print(f"Director: {director}")
-    print("")
 
 
 if __name__ == "__main__":
