@@ -8,7 +8,7 @@ import asyncio
 async def measure_accuracy(process_num: int, model_path: str, genre_list: list):
     correct = 0
 
-    for _ in range(100):
+    for _ in range(10):
         result = os.popen("python3 main.py " + model_path)
 
         r_genre_list = []
@@ -26,8 +26,9 @@ async def measure_accuracy(process_num: int, model_path: str, genre_list: list):
                 correct += 1
                 break
 
+    accuracy = correct / 10 * 100
     print(f"Process {process_num} done")
-    return correct
+    return accuracy
 
 
 async def main():
@@ -49,7 +50,7 @@ async def main():
     file.close()
     print(genre_list)
 
-    correct_values = await asyncio.gather(
+    accuracy_values = await asyncio.gather(
         measure_accuracy(1, model_path, genre_list),
         measure_accuracy(2, model_path, genre_list),
         measure_accuracy(3, model_path, genre_list),
@@ -62,8 +63,8 @@ async def main():
         measure_accuracy(10, model_path, genre_list),
     )
 
-    acc_per = sum(correct_values) / 10
-    print(f"Accuracy of {acc_per}%")
+    accuracy = sum(accuracy_values) / 10
+    print(f"Accuracy of {accuracy}%")
 
 
 if __name__ == "__main__":
