@@ -6,7 +6,7 @@ Movie recommendation system written in Python with PyTorch.
 ![GUI Generate Validation Data](./screenshots/gui_generate_validation_data.webp)
 
 ## Source of the IMDB Movies Dataset
-[IMDB Movies Dataset - kaggle](https://www.kaggle.com/datasets/harshitshankhdhar/imdb-dataset-of-top-1000-movies-and-tv-shows)
+[IMDB Movies Dataset - Top 1000 Movies by IMDB Rating - kaggle](https://www.kaggle.com/datasets/harshitshankhdhar/imdb-dataset-of-top-1000-movies-and-tv-shows)
 
 ## Usage Instructions
 ### 1. Create Validation Data
