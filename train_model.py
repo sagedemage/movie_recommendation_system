@@ -211,7 +211,8 @@ def main():
     print("")
     print(f"Best Accuracy: {best_accuracy}%")
     print(
-        f"Lowest Training loss: {best_loss}, Lowest Validation loss: {best_vloss}"
+        f"Lowest Training loss: {best_loss}, "
+        f"Lowest Validation loss: {best_vloss}"
     )
 
 
