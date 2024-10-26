@@ -14,7 +14,7 @@ WINDOW_WIDTH = 640
 WINDOW_HEIGHT = 480
 WINDOW_X_POS = 50
 WINDOW_Y_POS = 85
-PICKED_MOVIE_TEXT_FILE = "validation_data/picked_movie.txt"
+PICKED_MOVIE_TEXT_FILE = "validation_dataset/picked_movie.txt"
 
 
 def main():
@@ -124,7 +124,7 @@ def main():
         file.close()
 
         # 2. Add movies where one of their genres is in the picked
-        # movie's genre. This is to use as training data for
+        # movie's genre. This is to use as training dataset for
         # recommendation of movies.
         write_data = {}
 
@@ -132,7 +132,7 @@ def main():
             column = columns[i]
             write_data[column] = []
 
-        # Filter the data based on the genre of the picked movie
+        # Filter the dataset based on the genre of the picked movie
         for i, row in df_data.iterrows():
             r_genre = row["Genre"]
             r_genre = r_genre.replace(" ", "")
@@ -144,7 +144,7 @@ def main():
                         column = columns[k]
                         write_data[column].append(row[column])
 
-        # 3. Prepare the written data before writing it to a CSV file.
+        # 3. Prepare the written dataset before writing it to a CSV file.
         df_write_data = pd.DataFrame(write_data)
         df_write_data = df_write_data.drop_duplicates()
 
@@ -156,7 +156,7 @@ def main():
             rem = num_rows % 4
             df_write_data = df_write_data.drop(df_write_data.tail(rem).index)
 
-        # 4. Write the data to a CSV file.
+        # 4. Write the dataset to a CSV file.
         df_write_data.to_csv(CSV_VALIDATION_DATASET, index=False)
 
         print(f"Written the csv file to {CSV_VALIDATION_DATASET}")
