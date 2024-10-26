@@ -88,3 +88,5 @@ project.
   - [PyTorch TensorBoard Support](https://pytorch.org/tutorials/beginner/introyt/tensorboardyt_tutorial.html)
   - [Training with PyTorch](https://pytorch.org/tutorials/beginner/introyt/trainingyt.html)
   - [Model Understanding with Captum](https://pytorch.org/tutorials/beginner/introyt/captumyt.html)
+- [Nesterov Momentum Explained with examples in TensorFlow and PyTorch - Medium](https://medium.com/@giorgio.martinez1926/nesterov-momentum-explained-with-examples-in-tensorflow-and-pytorch-4673dbf21998)
+- [Pytorch Change the learning rate based on number of epochs - StackOverflow](https://stackoverflow.com/questions/60050586/pytorch-change-the-learning-rate-based-on-number-of-epochs)
