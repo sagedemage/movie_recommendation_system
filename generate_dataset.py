@@ -9,7 +9,7 @@ CSV_ORIGINAL_DATASET = "original_dataset/imdb_top_1000.csv"
 CSV_MOVIE_LABELS = "dataset/movie_labels.csv"
 
 
-def get_label_number(df_movie_labels: DataFrame, r_genre_item: str):
+def get_label_id(df_movie_labels: DataFrame, r_genre_item: str):
     rows = df_movie_labels.loc[df_movie_labels["Genre"] == r_genre_item]
     row = rows.iloc[0]
     return row["Label_ID"]
@@ -45,8 +45,8 @@ def main():
         r_genre_item = r_genre_list[0]
 
         # Specify the label of the movie entry
-        label_num = get_label_number(df_movie_labels, r_genre_item)
-        write_data["Label"].append(label_num)
+        label_id = get_label_id(df_movie_labels, r_genre_item)
+        write_data["Label"].append(label_id)
 
         # Specify the movie id of the movie entry
         write_data["Movie_ID"].append(i)
