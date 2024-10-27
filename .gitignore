@@ -5,7 +5,7 @@ venv/
 # PyTorch
 runs/
 trained_models/
-validation_data/
+validation_dataset/
 
 # PyCharm Python IDE
 .idea/

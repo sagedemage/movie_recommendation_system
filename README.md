@@ -6,7 +6,7 @@ Movie recommendation system written in Python with PyTorch.
 ![GUI Generate Validation Data](./screenshots/gui_generate_validation_data.webp)
 
 ## Source of the IMDB Movies Dataset
-[IMDB Movies Dataset - kaggle](https://www.kaggle.com/datasets/harshitshankhdhar/imdb-dataset-of-top-1000-movies-and-tv-shows)
+[IMDB Movies Dataset - Top 1000 Movies by IMDB Rating - kaggle](https://www.kaggle.com/datasets/harshitshankhdhar/imdb-dataset-of-top-1000-movies-and-tv-shows)
 
 ## Usage Instructions
 ### 1. Create Validation Data
@@ -61,12 +61,12 @@ with his alter-ego: the Joker.
 - Gross: 335451311.0
 
 ### 1. Result
-Here is the result after running the movie recommendation program 1000 times:
-- Accuracy of the recommendations: 80.9%
+Here is the result after running the movie recommendation program 100 times:
+- Accuracy of the movie recommendations: 82%
 
-**Note**: The `measure_accuracy.py` script runs the program 1000 times for me.
+**Note**: The `measure_accuracy.py` script runs the program 100 times for me.
 
-The accuracy of the model is 80.9%. There is certainly more work that has to be
+The accuracy of the model is 82%. There is certainly more work that has to be
 done to get it to a 90% accuracy. An accuracy above 75% is pretty good for a demo
 project.
 

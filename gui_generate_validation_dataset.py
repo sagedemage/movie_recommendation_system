@@ -14,7 +14,7 @@ WINDOW_WIDTH = 640
 WINDOW_HEIGHT = 480
 WINDOW_X_POS = 50
 WINDOW_Y_POS = 85
-PICKED_MOVIE_TEXT_FILE = "validation_data/picked_movie.txt"
+PICKED_MOVIE_TEXT_FILE = "validation_dataset/picked_movie.txt"
 
 
 def main():

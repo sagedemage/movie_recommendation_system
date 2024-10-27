@@ -5,7 +5,7 @@ import sys
 
 from config import CSV_DATASET, CSV_VALIDATION_DATASET
 
-PICKED_MOVIE_TEXT_FILE = "validation_data/picked_movie.txt"
+PICKED_MOVIE_TEXT_FILE = "validation_dataset/picked_movie.txt"
 
 
 def main():
