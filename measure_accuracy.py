@@ -15,10 +15,9 @@ async def measure_accuracy(process_num: int, model_path: str, genre_list: list):
 
         for line in result:
             if line[0:6] == "Genre:":
-                line = line.replace("Genre:", "")
-                line = line.replace(" ", "")
-                line = line.replace("\n", "")
-                r_genre_list = line.split(",")
+                line = line.removeprefix("Genre:")
+                line = line.strip(" \n")
+                r_genre_list = line.split(", ")
                 break
 
         for j in range(len(r_genre_list)):
@@ -43,10 +42,9 @@ async def main():
     genre_list = []
     for line in file:
         if line[0:6] == "Genre:":
-            line = line.replace("Genre:", "")
-            line = line.replace(" ", "")
-            line = line.replace("\n", "")
-            genre_list = line.split(",")
+            line = line.removeprefix("Genre:")
+            line = line.strip(" \n")
+            genre_list = line.split(", ")
     file.close()
     print(genre_list)
 

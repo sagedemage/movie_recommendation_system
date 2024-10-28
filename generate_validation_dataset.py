@@ -21,8 +21,7 @@ def main():
     row_index = int(args[1])
     pick_row = df_data.iloc[row_index]
     pick_genre = pick_row["Genre"]
-    pick_genre = pick_genre.replace(" ", "")
-    pick_genre_list = pick_genre.split(",")
+    pick_genre_list = pick_genre.split(", ")
 
     # Log the information of the movie to remember what movie the user chose
     file = open(PICKED_MOVIE_TEXT_FILE, "w", encoding="utf-8")
@@ -49,8 +48,7 @@ def main():
     # Filter the data based on the genre of the picked movie
     for i, row in df_data.iterrows():
         r_genre = row["Genre"]
-        r_genre = r_genre.replace(" ", "")
-        r_genre_list = r_genre.split(",")
+        r_genre_list = r_genre.split(", ")
 
         for j in range(len(r_genre_list)):
             if r_genre_list[j] in pick_genre_list:
