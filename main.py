@@ -42,7 +42,7 @@ def main():
     logits = saved_model(data_movie_ids)
     rand_nums = np.random.rand(4)
     pos_pred = rand_nums.argmax()
-    pred_movie_id = round(float(logits[pos_pred]), 0)
+    pred_movie_id = abs(round(float(logits[pos_pred]), 0))
 
     movie_id = int(pred_movie_id)
     title, released_year, runtime, genre, imdb_rating, director = (
