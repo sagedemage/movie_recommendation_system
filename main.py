@@ -6,6 +6,7 @@ from torch.utils.data import DataLoader
 from torch import nn
 from ml.dataset import MovieDataset
 from ml.model import MovieRecommendation
+import numpy as np
 
 from config import CSV_DATASET
 
@@ -40,11 +41,23 @@ def main():
     data_movie_ids = data_movie_ids.type(torch.float32)
 
     logits = saved_model(data_movie_ids)
-    pred_probab = nn.Softplus()(logits)
-    y_pred = pred_probab.argmax(0)
-    pred_tensor = pred_probab[y_pred]
 
-    movie_id = int(pred_tensor)
+    # Apply the rectified linear unit function (ReLU)
+    # to the model output to ensure the output is a
+    # tensor that always contains positive numbers.
+    #
+    # Output of the model for each number in the
+    # tensor is from [0, infinity).
+    #
+    # This is required to avoid an IndexError when
+    # using the get_item_by_movie_id method of the
+    # MovieDataset class.
+    pred_probab = nn.ReLU()(logits)
+    rand_nums = np.random.rand(4)
+    pos_pred = rand_nums.argmax()
+    pred_movie_id = round(float(pred_probab[pos_pred]), 0)
+
+    movie_id = int(pred_movie_id)
     title, released_year, runtime, genre, imdb_rating, director = (
         data_set.get_item_by_movie_id(movie_id)
     )
