@@ -19,10 +19,8 @@ def main():
     # - 15 % for validation
 
     portion = [int(0.85 * len(df_data))]
-    train_data, validation_data = (
-        np.split(  # pylint: disable=unbalanced-tuple-unpacking
-            df_data.sample(frac=1, random_state=42), portion
-        )
+    train_data, validation_data = np.split(
+        df_data.sample(frac=1, random_state=42), portion
     )
 
     print(len(train_data))

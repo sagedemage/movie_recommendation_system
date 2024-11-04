@@ -274,6 +274,7 @@ disable=R,
         wrong-import-order,
         xrange-builtin,
         zip-builtin-not-iterating,
+        unbalanced-tuple-unpacking
 
 
 [REPORTS]
