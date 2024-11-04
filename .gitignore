@@ -6,6 +6,7 @@ venv/
 runs/
 trained_models/
 validation_dataset/
+personalized_dataset/
 
 # PyCharm Python IDE
 .idea/
