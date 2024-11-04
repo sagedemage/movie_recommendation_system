@@ -19,7 +19,7 @@ WINDOW_Y_POS = 85
 def main():
     df_data = pd.read_csv(CSV_DATASET)
     root = tk.Tk()
-    root.title("Generate Validation Data")
+    root.title("Generate Personalized Data")
     root.geometry(
         f"{WINDOW_WIDTH}x{WINDOW_HEIGHT}+{WINDOW_X_POS}+{WINDOW_Y_POS}"
     )
