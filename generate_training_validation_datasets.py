@@ -1,4 +1,8 @@
-"""Generate the training and validation datasets via the train-test split method"""
+"""
+Generate the training and validation datasets
+via the train-test split method
+"""
+
 import numpy as np
 import pandas as pd
 
@@ -14,8 +18,12 @@ def main():
     # - 85 % for training
     # - 15 % for validation
 
-    portion = [int(.85*len(df_data))]
-    train_data, validation_data = np.split(df_data.sample(frac=1, random_state=42), portion)
+    portion = [int(0.85 * len(df_data))]
+    train_data, validation_data = (
+        np.split(  # pylint: disable=unbalanced-tuple-unpacking
+            df_data.sample(frac=1, random_state=42), portion
+        )
+    )
 
     print(len(train_data))
     print(len(validation_data))
@@ -28,7 +36,9 @@ def main():
     df_write_validation_dataset.to_csv(CSV_VALIDATION_DATASET, index=False)
 
     print(f"Written the training dataset csv file to {CSV_TRAINING_DATASET}")
-    print(f"Written the validation dataset csv file to {CSV_VALIDATION_DATASET}")
+    print(
+        f"Written the validation dataset csv file to {CSV_VALIDATION_DATASET}"
+    )
 
 
 if __name__ == "__main__":

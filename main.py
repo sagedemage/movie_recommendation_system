@@ -27,7 +27,9 @@ def main():
 
     data_set = MovieDataset(CSV_DATASET)
     personalized_data_set = MovieDataset(CSV_PERSONALIZED_DATASET)
-    personalized_data_loader = DataLoader(personalized_data_set, batch_size=BATCH_SIZE, shuffle=True)
+    personalized_data_loader = DataLoader(
+        personalized_data_set, batch_size=BATCH_SIZE, shuffle=True
+    )
 
     personalized_data_movie_ids, _ = next(iter(personalized_data_loader))
 
@@ -37,7 +39,9 @@ def main():
 
     # Perform a transform on the data for it to be usable for the model
     personalized_data_movie_ids = personalized_data_movie_ids.to(device)
-    personalized_data_movie_ids = personalized_data_movie_ids.type(torch.float32)
+    personalized_data_movie_ids = personalized_data_movie_ids.type(
+        torch.float32
+    )
 
     logits = saved_model(personalized_data_movie_ids)
 
