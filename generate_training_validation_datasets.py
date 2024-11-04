@@ -23,9 +23,6 @@ def main():
         df_data.sample(frac=1, random_state=42), portion
     )
 
-    print(len(train_data))
-    print(len(validation_data))
-
     # 3. Write the training and validation datasets to a CSV file.
     df_write_training_dataset = pd.DataFrame(train_data)
     df_write_training_dataset.to_csv(CSV_TRAINING_DATASET, index=False)
