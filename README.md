@@ -12,7 +12,7 @@ Movie recommendation system written in Python with PyTorch.
 
 ## Usage Instructions
 
-### 1. Generate the Datasets for Training
+### 1. Generate the Training and Validation Datasets
 1.1 Generate the dataset from the original dataset:
 ```
 python3 generate_dataset.py
