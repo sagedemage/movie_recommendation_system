@@ -58,15 +58,6 @@ def main():
     df_write_data = pd.DataFrame(write_data)
     df_write_data = df_write_data.drop_duplicates()
 
-    num_rows = df_write_data.shape[0]
-
-    # Make sure the length of the dataset is divisible by 4
-    # This is required for it to work with a batch size of 4
-    # for training
-    if num_rows % 4 != 0:
-        rem = num_rows % 4
-        df_write_data = df_write_data.drop(df_write_data.tail(rem).index)
-
     # 4. Write the data to a CSV file.
     df_write_data.to_csv(CSV_PERSONALIZED_DATASET, index=False)
 
