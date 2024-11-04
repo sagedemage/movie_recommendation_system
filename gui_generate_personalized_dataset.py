@@ -149,7 +149,7 @@ def main():
         # 4. Write the data to a CSV file.
         df_write_data.to_csv(CSV_PERSONALIZED_DATASET, index=False)
 
-        print(f"Written the csv file to {CSV_PERSONALIZED_DATASET}")
+        print(f"Written the personalized dataset csv file to {CSV_PERSONALIZED_DATASET}")
         print(
             f"Written the picked movie information to {PICKED_MOVIE_TEXT_FILE}"
         )
