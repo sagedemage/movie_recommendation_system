@@ -18,9 +18,9 @@ def main():
     # - 85% for training
     # - 15% for validation
 
-    portion = [int(0.85 * len(df_data))]
+    per_for_train = int(0.85 * len(df_data))
     train_data, validation_data = np.split(
-        df_data.sample(frac=1, random_state=42), portion
+        df_data.sample(frac=1, random_state=42), [per_for_train]
     )
 
     # 3. Write the training and validation datasets to a CSV file.
