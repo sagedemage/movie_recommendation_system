@@ -15,8 +15,8 @@ def main():
     df_data = pd.read_csv(CSV_DATASET)
 
     # 2. Split the dataset into training and validation datasets
-    # - 85 % for training
-    # - 15 % for validation
+    # - 85% for training
+    # - 15% for validation
 
     portion = [int(0.85 * len(df_data))]
     train_data, validation_data = np.split(
