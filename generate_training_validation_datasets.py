@@ -11,7 +11,7 @@ from config import CSV_DATASET, CSV_TRAINING_DATASET, CSV_VALIDATION_DATASET
 
 def main():
     # 1. Read CSV files
-    # Read the original dataset
+    # Read the dataset
     df_data = pd.read_csv(CSV_DATASET)
 
     # 2. Split the dataset into training and validation datasets
