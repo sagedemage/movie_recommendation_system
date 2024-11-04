@@ -18,7 +18,7 @@ Movie recommendation system written in Python with PyTorch.
 python3 generate_dataset.py
 ```
 
-1.2 Create the `training_dataset` and `validation_dataset` directories:
+1.2 Create the `training_dataset/` and `validation_dataset/` directories:
 ```
 mkdir training_dataset
 mkdir validation_dataset
@@ -30,7 +30,7 @@ python3 generate_training_validation_datasets.py
 ```
 
 ### 2. Train a Model
-2.1 Create the `trained_models` directory:
+2.1 Create the `trained_models/` directory:
 ```
 mkdir trained_models
 ```
@@ -45,7 +45,7 @@ tensorboard --logdir=runs
 python3 train_model.py
 ```
 ### 3. Generate Personalized Dataset
-3.1 Create the `personalized_dataset` directory:
+3.1 Create the `personalized_dataset/` directory:
 ```
 mkdir personalized_dataset
 ```
