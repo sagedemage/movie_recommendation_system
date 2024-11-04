@@ -14,5 +14,5 @@ CSV_PERSONALIZED_DATASET = "personalized_dataset/recommended_movies.csv"
 # The picked movie text file is used to remember what movie the user chose
 PICKED_MOVIE_TEXT_FILE = "personalized_dataset/picked_movie.txt"
 
-# The batch size is used for preparing data with DataLoaders
+# The batch size is used for preparing the data with DataLoaders
 BATCH_SIZE = 5
