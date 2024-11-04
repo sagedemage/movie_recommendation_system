@@ -7,6 +7,7 @@ runs/
 trained_models/
 validation_dataset/
 personalized_dataset/
+training_dataset/
 
 # PyCharm Python IDE
 .idea/
