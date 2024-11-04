@@ -11,14 +11,26 @@ Movie recommendation system written in Python with PyTorch.
 [IMDB Movies Dataset - Top 1000 Movies by IMDB Rating - kaggle](https://www.kaggle.com/datasets/harshitshankhdhar/imdb-dataset-of-top-1000-movies-and-tv-shows)
 
 ## Usage Instructions
-### 1. Create Validation Data
-1.1 Create a validation data with the index of the row:
+
+### 1. Generate the Datasets for Training
+1.1 Generate the dataset from the original dataset:
 ```
-python3 generate_validation_data.py 33
+python3 generate_dataset.py
+```
+
+1.2 Create the `training_dataset` and `validation_dataset` directories:
+```
+mkdir training_dataset
+mkdir validation_dataset
+```
+
+1.3 Generate the training and validation datasets:
+```
+python3 generate_training_validation_datasets.py
 ```
 
 ### 2. Train a Model
-2.1 Make sure to create the `trained_models` directory before training a model:
+2.1 Create the `trained_models` directory:
 ```
 mkdir trained_models
 ```
@@ -32,12 +44,34 @@ tensorboard --logdir=runs
 ```
 python3 train_model.py
 ```
+### 3. Generate Personalized Dataset
+3.1 Create the `personalized_dataset` directory:
+```
+mkdir personalized_dataset
+```
 
-### 3. Run Program
-3.1 Run the program with the file path of the model:
+3.2 Create a personalized dataset with the index of the row of the movie entry:
 ```
-python3 main.py trained_models/model_20241017_124650_93.pt
+python3 generate_personalized_dataset.py 33
 ```
+
+or
+
+Use the GUI program to create a personalized dataset by choosing a movie entry:
+```
+python3 gui_generate_personalized_dataset.py
+```
+
+### 4. Run Program
+4.1 Run the program with the file path of the saved model:
+```
+python3 main.py trained_models/model_20241103_222757_184.pt
+```
+
+- The file name format of the saved models:
+  - model_\<timestamp\>_\<epoch_number\>.pt"
+- The timestamp format:
+  - %Y%m%d_%H%M%S
 
 **Note**: It is a good idea to pick a model with the highest number of epochs.
 
