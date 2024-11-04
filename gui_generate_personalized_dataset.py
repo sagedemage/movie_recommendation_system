@@ -1,5 +1,5 @@
 """
-Generate a validation dataset based on the
+Generate a personalized dataset based on the
 movie the user picks via a GUI interface
 """
 
@@ -7,20 +7,19 @@ import tkinter as tk
 from tkinter import ttk
 from tkinter.constants import CENTER, RIGHT, Y, NO, LEFT, BOTH, BOTTOM, X
 
-from config import CSV_DATASET, CSV_VALIDATION_DATASET
+from config import CSV_DATASET, CSV_PERSONALIZED_DATASET, PICKED_MOVIE_TEXT_FILE
 import pandas as pd
 
 WINDOW_WIDTH = 640
 WINDOW_HEIGHT = 480
 WINDOW_X_POS = 50
 WINDOW_Y_POS = 85
-PICKED_MOVIE_TEXT_FILE = "validation_dataset/picked_movie.txt"
 
 
 def main():
     df_data = pd.read_csv(CSV_DATASET)
     root = tk.Tk()
-    root.title("Generate Validation Data")
+    root.title("Generate Personalized Data")
     root.geometry(
         f"{WINDOW_WIDTH}x{WINDOW_HEIGHT}+{WINDOW_X_POS}+{WINDOW_Y_POS}"
     )
@@ -147,18 +146,13 @@ def main():
         df_write_data = pd.DataFrame(write_data)
         df_write_data = df_write_data.drop_duplicates()
 
-        num_rows = df_write_data.shape[0]
-
-        # Make sure the length of the dataset is divisible by 4
-        # This is required for it to work with a batch size of 4 for training
-        if num_rows % 4 != 0:
-            rem = num_rows % 4
-            df_write_data = df_write_data.drop(df_write_data.tail(rem).index)
-
         # 4. Write the data to a CSV file.
-        df_write_data.to_csv(CSV_VALIDATION_DATASET, index=False)
+        df_write_data.to_csv(CSV_PERSONALIZED_DATASET, index=False)
 
-        print(f"Written the csv file to {CSV_VALIDATION_DATASET}")
+        print(
+            f"Written the personalized dataset csv file "
+            f"to {CSV_PERSONALIZED_DATASET}"
+        )
         print(
             f"Written the picked movie information to {PICKED_MOVIE_TEXT_FILE}"
         )

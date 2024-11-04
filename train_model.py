@@ -12,13 +12,12 @@ from torch.utils.tensorboard import SummaryWriter
 from ml.dataset import MovieDataset
 from ml.model import MovieRecommendation
 
-from config import CSV_DATASET, CSV_VALIDATION_DATASET
+from config import CSV_TRAINING_DATASET, CSV_VALIDATION_DATASET, BATCH_SIZE
 
 TRAINED_MODEL_DIR = "trained_models/"
 LOG_DATA_DIR = "runs/"
 
 # batch_size - how many samples per batch to load
-BATCH_SIZE = 4
 EPOCHS = 190
 
 # Optimization
@@ -75,7 +74,7 @@ def train_one_epoch(
 
 
 def main():
-    training_set = MovieDataset(CSV_DATASET)
+    training_set = MovieDataset(CSV_TRAINING_DATASET)
     validation_set = MovieDataset(CSV_VALIDATION_DATASET)
 
     training_loader = DataLoader(

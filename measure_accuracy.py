@@ -38,7 +38,7 @@ async def main():
     # Use trained model
     model_path = args[1]
 
-    file = open("validation_dataset/picked_movie.txt", "r", encoding="utf-8")
+    file = open("personalized_dataset/picked_movie.txt", "r", encoding="utf-8")
     genre_list = []
     for line in file:
         if line[0:6] == "Genre:":

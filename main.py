@@ -8,9 +8,7 @@ from ml.dataset import MovieDataset
 from ml.model import MovieRecommendation
 import numpy as np
 
-from config import CSV_DATASET
-
-BATCH_SIZE = 4
+from config import CSV_DATASET, CSV_PERSONALIZED_DATASET, BATCH_SIZE
 
 
 def main():
@@ -28,19 +26,24 @@ def main():
     )
 
     data_set = MovieDataset(CSV_DATASET)
-    data_loader = DataLoader(data_set, batch_size=BATCH_SIZE, shuffle=True)
+    personalized_data_set = MovieDataset(CSV_PERSONALIZED_DATASET)
+    personalized_data_loader = DataLoader(
+        personalized_data_set, batch_size=BATCH_SIZE, shuffle=True
+    )
 
-    data_movie_ids, _ = next(iter(data_loader))
+    personalized_data_movie_ids, _ = next(iter(personalized_data_loader))
 
     # Load a saved version of the model
     saved_model = MovieRecommendation().to(device)
     saved_model.load_state_dict(torch.load(model_path, weights_only=True))
 
     # Perform a transform on the data for it to be usable for the model
-    data_movie_ids = data_movie_ids.to(device)
-    data_movie_ids = data_movie_ids.type(torch.float32)
+    personalized_data_movie_ids = personalized_data_movie_ids.to(device)
+    personalized_data_movie_ids = personalized_data_movie_ids.type(
+        torch.float32
+    )
 
-    logits = saved_model(data_movie_ids)
+    logits = saved_model(personalized_data_movie_ids)
 
     # Apply the rectified linear unit function (ReLU)
     # to the model output to ensure the output is a

@@ -4,8 +4,11 @@ venv/
 
 # PyTorch
 runs/
-trained_models/
-validation_dataset/
+trained_models/*.pt
+validation_dataset/*.csv
+personalized_dataset/*.csv
+personalized_dataset/*.txt
+training_dataset/*.csv
 
 # PyCharm Python IDE
 .idea/
