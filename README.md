@@ -12,29 +12,32 @@ Movie recommendation system written in Python with PyTorch.
 
 ## Usage Instructions
 
-### 1. Generate the Training and Validation Datasets
+### 1. Generate the Dataset
 1.1 Generate the dataset from the original dataset:
 ```
 python3 generate_dataset.py
 ```
 
-1.2 Generate the training and validation datasets:
+### 2. Generate the Training and Validation Datasets
+2.1 Generate the training and validation datasets:
 ```
 python3 generate_training_validation_datasets.py
 ```
 
-### 2. Train a Model
-2.1 Start TensorBoard:
+### 3. Train a Model
+3.1 Start TensorBoard to provide the visualization required
+to check how well the trained model did:
 ```
 tensorboard --logdir=runs
 ```
 
-2.2 Train a model:
+3.2 Train a model:
 ```
 python3 train_model.py
 ```
-### 3. Generate Personalized Dataset
-3.1 Create a personalized dataset with the index of the row of the movie entry:
+
+### 4. Generate Personalized Dataset
+4.1 Create a personalized dataset with the index of the row of the movie entry:
 ```
 python3 generate_personalized_dataset.py 33
 ```
@@ -46,8 +49,8 @@ Use the GUI program to create a personalized dataset by choosing a movie entry:
 python3 gui_generate_personalized_dataset.py
 ```
 
-### 4. Run Program
-4.1 Run the program with the file path of the saved model:
+### 5. Run Program
+5.1 Run the program with the file path of the saved model:
 ```
 python3 main.py trained_models/model_20241103_222757_184.pt
 ```
