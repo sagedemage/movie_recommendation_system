@@ -56,7 +56,7 @@ def main():
     # using the get_item_by_movie_id method of the
     # MovieDataset class.
     pred_probab = nn.ReLU()(logits)
-    rand_nums = np.random.rand(4)
+    rand_nums = np.random.rand(BATCH_SIZE)
     pos_pred = rand_nums.argmax()
     pred_movie_id = round(float(pred_probab[pos_pred]), 0)
 
